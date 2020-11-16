@@ -66,13 +66,13 @@ object DataDummy {
         val movieList = ArrayList<MovieAndTvShowEntity>()
 
         for (i in movieId.indices) {
-            val movie = MovieAndTvShowEntity()
-            movie.id = movieId[i]
-            movie.title = movieTitle[i]
-            movie.synopsis = movieSynopsis[i]
-            movie.poster_url = moviewPosterUrl[i]
-            movie.backdrop_url = backgroundPath[i]
-            movie.rating = rating[i]
+            val movie = MovieAndTvShowEntity(
+                movieId[i],
+                movieTitle[i],
+                movieSynopsis[i],
+                moviewPosterUrl[i],
+                backgroundPath[i],
+                rating[i])
             movieList.add(movie)
         }
 
@@ -106,7 +106,7 @@ object DataDummy {
             "Lyra is an orphan who lives in a parallel universe in which science, theology and magic are entwined. Lyra's search for a kidnapped friend uncovers a sinister plot involving stolen children, and turns into a quest to understand a mysterious phenomenon called Dust. She is later joined on her journey by Will, a boy who possesses a knife that can cut windows between worlds. As Lyra learns the truth about her parents and her prophesied destiny, the two young people are caught up in a war against celestial powers that ranges across many worlds.",
             "Follows the personal and professional lives of a group of doctors at Seattle’s Grey Sloan Memorial Hospital.",
             "Set in Springfield, the average American town, the show focuses on the antics and everyday adventures of the Simpson family; Homer, Marge, Bart, Lisa and Maggie, as well as a virtual cast of thousands. Since the beginning, the series has been a pop culture icon, attracting hundreds of celebrities to guest star. The show has also made name for itself in its fearless satirical take on politics, media and American life in general."
-       )
+        )
 
         val tvShowPosterUrl = arrayOf(
             "https://image.tmdb.org/t/p/w600_and_h900_bestv2/6tfT03sGp9k4c0J3dypjrI8TSAI.jpg",
@@ -141,13 +141,13 @@ object DataDummy {
         val tvShowList = ArrayList<MovieAndTvShowEntity>()
 
         for (i in tvShowId.indices) {
-            val tvShow = MovieAndTvShowEntity()
-            tvShow.id = tvShowId[i]
-            tvShow.title = tvShowTitle[i]
-            tvShow.synopsis = tvShowSynopsis[i]
-            tvShow.poster_url = tvShowPosterUrl[i]
-            tvShow.backdrop_url = backgroundPath[i]
-            tvShow.rating = rating[i]
+            val tvShow = MovieAndTvShowEntity(
+                tvShowId[i],
+                tvShowTitle[i],
+                tvShowSynopsis[i],
+                tvShowPosterUrl[i],
+                backgroundPath[i],
+                rating[i])
             tvShowList.add(tvShow)
         }
 

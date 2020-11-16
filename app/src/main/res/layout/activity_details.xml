@@ -20,6 +20,7 @@
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/cd_btn_back"
+            android:elevation="3dp"
             android:src="@drawable/ic_baseline_arrow_back_24_white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

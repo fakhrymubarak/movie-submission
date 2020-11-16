@@ -50,15 +50,15 @@ class TvShowFragment : Fragment() {
         rv_tv_show.adapter = tvShowAdapter
         tvShowAdapter.setOnItemClickCallback(object : TvShowAdapter.OnItemClickCallback {
             override fun onItemClicked(data: MovieAndTvShowEntity) {
-                showSelectedUser(data)
+                showSelectedUser(data.id)
             }
         })
         showLoading(false)
     }
 
-    private fun showSelectedUser(tvShow: MovieAndTvShowEntity) {
+    private fun showSelectedUser(itemsId: Int?) {
         val intent = Intent(requireActivity(), DetailsActivity::class.java)
-        intent.putExtra(DetailsActivity.EXTRA_TV, tvShow)
+        intent.putExtra(DetailsActivity.EXTRA_TV, itemsId)
         startActivity(intent)
     }
 
