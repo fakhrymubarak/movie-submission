@@ -35,31 +35,30 @@ object DataDummy {
         )
 
         val moviewPosterUrl = arrayOf(
-            "/h8Rb9gBr48ODIwYUttZNYeMWeUU.jpg",
-            "/ugZW8ocsrfgI95pnQ7wrmKDxIe.jpg",
-            "/betExZlgK0l7CZ9CsCBVcwO1OjL.jpg",
-            "/jlJ8nDhMhCYJuzOw3f52CP1W8MW.jpg",
-            "/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg",
-            "/hddzYJtfYYeMDOQVcH58n8m1W3A.jpg",
-            "/elZ6JCzSEvFOq4gNjNeZsnRFsvj.jpg",
-            "/lQfdytwN7eh0tXWjIiMceFdBBvD.jpg",
-            "/riYInlsq2kf1AWoGm80JQW5dLKp.jpg",
-            "/9HT9982bzgN5on1sLRmc1GMn6ZC.jpg",
-            "/6agKYU5IQFpuDyUYPu39w7UCRrJ.jpg",
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/h8Rb9gBr48ODIwYUttZNYeMWeUU.jpg",
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/ugZW8ocsrfgI95pnQ7wrmKDxIe.jpg",
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/betExZlgK0l7CZ9CsCBVcwO1OjL.jpg",
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/jlJ8nDhMhCYJuzOw3f52CP1W8MW.jpg",
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg",
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/hddzYJtfYYeMDOQVcH58n8m1W3A.jpg",
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/elZ6JCzSEvFOq4gNjNeZsnRFsvj.jpg",
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/lQfdytwN7eh0tXWjIiMceFdBBvD.jpg",
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/riYInlsq2kf1AWoGm80JQW5dLKp.jpg",
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/9HT9982bzgN5on1sLRmc1GMn6ZC.jpg"
+
         )
 
         val backgroundPath = arrayOf(
-            "/xoqr4dMbRJnzuhsWDF3XNHQwJ9x.jpg",
-            "/86L8wqGMDbwURPni2t7FQ0nDjsH.jpg",
-            "/4lWr2j3ZSEe8qlt3W3ma8TiiMQB.jpg",
-            "/wu1uilmhM4TdluKi2ytfz8gidHf.jpg",
-            "/5UkzNSOK561c2QRy2Zr4AkADzLT.jpg",
-            "/DA7gzvlBoxMNL0XmGgTZOyv67P.jpg",
-            "/aO5ILS7qnqtFIprbJ40zla0jhpu.jpg",
-            "/htBUhLSS7FfHtydgYxUWjL3J1Q1.jpg",
-            "/kMe4TKMDNXTKptQPAdOF0oZHq3V.jpg",
-            "/gnf4Cb2rms69QbCnGFJyqwBWsxv.jpg",
-            "/hbrXbVoE0NuA1ORoSGGYNASagrl.jpg",
+            "https://image.tmdb.org/t/p/w500_and_h282_face/xoqr4dMbRJnzuhsWDF3XNHQwJ9x.jpg",
+            "https://image.tmdb.org/t/p/w500_and_h282_face/86L8wqGMDbwURPni2t7FQ0nDjsH.jpg",
+            "https://image.tmdb.org/t/p/w500_and_h282_face/4lWr2j3ZSEe8qlt3W3ma8TiiMQB.jpg",
+            "https://image.tmdb.org/t/p/w500_and_h282_face/wu1uilmhM4TdluKi2ytfz8gidHf.jpg",
+            "https://image.tmdb.org/t/p/w500_and_h282_face/5UkzNSOK561c2QRy2Zr4AkADzLT.jpg",
+            "https://image.tmdb.org/t/p/w500_and_h282_face/DA7gzvlBoxMNL0XmGgTZOyv67P.jpg",
+            "https://image.tmdb.org/t/p/w500_and_h282_face/aO5ILS7qnqtFIprbJ40zla0jhpu.jpg",
+            "https://image.tmdb.org/t/p/w500_and_h282_face/htBUhLSS7FfHtydgYxUWjL3J1Q1.jpg",
+            "https://image.tmdb.org/t/p/w500_and_h282_face/kMe4TKMDNXTKptQPAdOF0oZHq3V.jpg",
+            "https://image.tmdb.org/t/p/w500_and_h282_face/gnf4Cb2rms69QbCnGFJyqwBWsxv.jpg"
         )
 
         val rating = doubleArrayOf(6.0, 1.0, 5.0, 7.0, 8.3, 5.9, 7.3, 6.3, 7.7, 6.5, 6.4)
@@ -110,29 +109,29 @@ object DataDummy {
        )
 
         val tvShowPosterUrl = arrayOf(
-            "/6tfT03sGp9k4c0J3dypjrI8TSAI.jpg",
-            "/sWgBv7LV2PRoQgkxwlibdGXKz1S.jpg",
-            "/wGFUewXPeMErCe2xnCmmLEiHOGh.jpg",
-            "/4EYPN5mVIhKLfxGruy7Dy41dTVn.jpg",
-            "/mY7SeH4HFFxW1hiI6cWuwCRKptN.jpg",
-            "/zU0htwkhNvBQdVSIKB9s6hgVeFK.jpg",
-            "/z31GxpVgDsFAF4paZR8PRsiP16D.jpg",
-            "/g6tIKGc3f1H5QMz1dcgCwADKpZ7.jpg",
-            "/clnyhPqj1SNgpAdeSS6a6fwE6Bo.jpg",
-            "/2IWouZK4gkgHhJa3oyYuSWfSqbG.jpg"
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/6tfT03sGp9k4c0J3dypjrI8TSAI.jpg",
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/sWgBv7LV2PRoQgkxwlibdGXKz1S.jpg",
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/wGFUewXPeMErCe2xnCmmLEiHOGh.jpg",
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/4EYPN5mVIhKLfxGruy7Dy41dTVn.jpg",
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/mY7SeH4HFFxW1hiI6cWuwCRKptN.jpg",
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/zU0htwkhNvBQdVSIKB9s6hgVeFK.jpg",
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/z31GxpVgDsFAF4paZR8PRsiP16D.jpg",
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/g6tIKGc3f1H5QMz1dcgCwADKpZ7.jpg",
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/clnyhPqj1SNgpAdeSS6a6fwE6Bo.jpg",
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/2IWouZK4gkgHhJa3oyYuSWfSqbG.jpg"
         )
 
         val backgroundPath = arrayOf(
-            "/iDbIEpCM9nhoayUDTwqFL1iVwzb.jpg",
-            "/9ijMGlJKqcslswWUzTEwScm82Gs.jpg",
-            "/58PON1OrnBiX6CqEHgeWKVwrCn6.jpg",
-            "/ta5oblpMlEcIPIS2YGcq9XEkWK2.jpg",
-            "/mGVrXeIjyecj6TKmwPVpHlscEmw.jpg",
-            "/34OGjFEbHj0E3lE2w0iTUVq0CBz.jpg",
-            "/pLVrN9B750ehwTFdQ6n3HRUERLd.jpg",
-            "/9yKCJTOh9m3Lol2RY3kw99QPH6x.jpg",
-            "/3IIBf6VlwEyKAX4cN2XCM1gKdgM.jpg",
-            "/hpU2cHC9tk90hswCFEpf5AtbqoL.jpg"
+            "https://image.tmdb.org/t/p/w500_and_h282_face/iDbIEpCM9nhoayUDTwqFL1iVwzb.jpg",
+            "https://image.tmdb.org/t/p/w500_and_h282_face/9ijMGlJKqcslswWUzTEwScm82Gs.jpg",
+            "https://image.tmdb.org/t/p/w500_and_h282_face/58PON1OrnBiX6CqEHgeWKVwrCn6.jpg",
+            "https://image.tmdb.org/t/p/w500_and_h282_face/ta5oblpMlEcIPIS2YGcq9XEkWK2.jpg",
+            "https://image.tmdb.org/t/p/w500_and_h282_face/mGVrXeIjyecj6TKmwPVpHlscEmw.jpg",
+            "https://image.tmdb.org/t/p/w500_and_h282_face/34OGjFEbHj0E3lE2w0iTUVq0CBz.jpg",
+            "https://image.tmdb.org/t/p/w500_and_h282_face/pLVrN9B750ehwTFdQ6n3HRUERLd.jpg",
+            "https://image.tmdb.org/t/p/w500_and_h282_face/9yKCJTOh9m3Lol2RY3kw99QPH6x.jpg",
+            "https://image.tmdb.org/t/p/w500_and_h282_face/3IIBf6VlwEyKAX4cN2XCM1gKdgM.jpg",
+            "https://image.tmdb.org/t/p/w500_and_h282_face/hpU2cHC9tk90hswCFEpf5AtbqoL.jpg"
 
         )
 
