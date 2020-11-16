@@ -37,9 +37,4 @@
         <item name = "android:textSize">12sp</item>
     </style>
 
-    <style name="TextContext.Small">
-        <item name="android:fontFamily">@font/raleway</item>
-        <item name = "android:textSize">10sp</item>
-    </style>
-
 </resources>

@@ -36,7 +36,6 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
-            android:id="@+id/iv_backdrop_layer"
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:contentDescription="@string/cd_movie_backdrop"

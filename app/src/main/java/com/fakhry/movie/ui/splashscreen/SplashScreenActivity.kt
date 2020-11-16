@@ -1,9 +1,9 @@
 package com.fakhry.movie.ui.splashscreen
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.fakhry.movie.R
 import com.fakhry.movie.ui.dashboard.DashboardActivity
 import kotlinx.coroutines.Dispatchers

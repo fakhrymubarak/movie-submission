@@ -1,7 +1,7 @@
 package com.fakhry.movie.ui.dashboard
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.fakhry.movie.R
 import kotlinx.android.synthetic.main.activity_dashboard.*
 

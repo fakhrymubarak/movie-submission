@@ -1,7 +1,7 @@
 package com.fakhry.movie.utils
 
 import com.fakhry.movie.model.MovieAndTvShowEntity
-import java.util.ArrayList
+import java.util.*
 
 object DataDummy {
 
