@@ -1,7 +1,8 @@
 package com.fakhry.movie.ui.details
 
 import com.fakhry.movie.utils.DataDummy
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 
