@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Movie Submission</string>
+
+    <!--  Fragment  -->
+    <string name="tab_text_1">Movies</string>
+    <string name="tab_text_2">TV Shows</string>
+
+    <!--  Details   -->
+    <string name="rating">Rating :</string>
+    <string name="synopsis">Synopsis</string>
+
+    <!--  ContentDescription  -->
+    <string name="cd_movie_poster">Movie Poster</string>
+    <string name="cd_movie_backdrop">Movie Backdrop</string>
+    <string name="cd_logo">Logo Application</string>
 </resources>

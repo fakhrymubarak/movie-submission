@@ -9,6 +9,6 @@ data class MovieAndTvShowEntity (
     var title : String? = null,
     var synopsis : String? = null,
     var poster_url : String? = null,
-    var rating : Double? = null,
-    var backdrop_url : String? = null
+    var backdrop_url : String? = null,
+    var rating : Double? = null
 ) : Parcelable

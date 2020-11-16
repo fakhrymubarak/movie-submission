@@ -14,4 +14,5 @@
     <color name="blueDark">#102235</color>
     <color name="blueLight">#122c45</color>
     <color name="blueLighter">#374c5f</color>
+    <color name="yellow">#FFC107</color>
 </resources>
