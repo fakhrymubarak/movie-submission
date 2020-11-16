@@ -12,6 +12,7 @@
     <color name="redTheme">#e4141e</color>
     <color name="redThemeLighter">#FD4952</color>
     <color name="blueDark">#102235</color>
+    <color name="blueDarkTransparent50">#80102235</color>
     <color name="blueLight">#122c45</color>
     <color name="blueLighter">#374c5f</color>
     <color name="yellow">#FFC107</color>

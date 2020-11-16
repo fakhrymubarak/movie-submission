@@ -29,7 +29,10 @@ class TvShowFragment : Fragment() {
         showLoading(true)
 
         if (activity != null) {
-            val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[TvShowViewModel::class.java]
+            val viewModel = ViewModelProvider(
+                this,
+                ViewModelProvider.NewInstanceFactory()
+            )[TvShowViewModel::class.java]
             val tvShows = viewModel.getTvShow()
 
             showRecyclerView(tvShows)
@@ -50,6 +53,7 @@ class TvShowFragment : Fragment() {
                 showSelectedUser(data)
             }
         })
+        showLoading(false)
     }
 
     private fun showSelectedUser(tvShow: MovieAndTvShowEntity) {

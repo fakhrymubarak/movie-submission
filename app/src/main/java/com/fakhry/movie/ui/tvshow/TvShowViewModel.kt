@@ -5,6 +5,6 @@ import com.fakhry.movie.model.MovieAndTvShowEntity
 import com.fakhry.movie.utils.DataDummy
 
 class TvShowViewModel : ViewModel() {
-    fun getTvShow() : List<MovieAndTvShowEntity> = DataDummy.generateDummyMovie()
+    fun getTvShow() : List<MovieAndTvShowEntity> = DataDummy.generateDummyTvShow()
 
 }
