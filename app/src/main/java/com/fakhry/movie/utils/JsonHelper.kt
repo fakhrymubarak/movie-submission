@@ -37,7 +37,7 @@ class JsonHelper(private val context: Context) {
                 val title = item.getString("title")
                 val synopsis = item.getString("overview")
                 val posterUrl = "https://image.tmdb.org/t/p/w600_and_h900_bestv2${item.getString("poster_path")}"
-                val backdropUrl = "https://image.tmdb.org/t/p/w600_and_h900_bestv2${item.getString("backdrop_path")}"
+                val backdropUrl = "https://image.tmdb.org/t/p/w500_and_h282_face${item.getString("backdrop_path")}"
                 val rating = item.getDouble("vote_average")
 
                 val movieResponse = MovieAndTvShowResponse(id, title, synopsis, posterUrl, backdropUrl, rating)

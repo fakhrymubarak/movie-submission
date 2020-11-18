@@ -17,9 +17,4 @@ class RemoteDataSource(private val jsonHelper: JsonHelper) {
     fun getAllMovies(): List<MovieAndTvShowResponse> = jsonHelper.loadPopularMovies()
 
     fun getAllTvShows(): List<MovieAndTvShowResponse> = jsonHelper.loadPopularTvShows()
-
-    fun getMovieDetails(movieId : Int): MovieAndTvShowResponse = jsonHelper.loadPopularMovies()[movieId]
-
-    fun getTvShowsDetails(showId : Int): MovieAndTvShowResponse = jsonHelper.loadPopularTvShows()[showId]
-
 }
