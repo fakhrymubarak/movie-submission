@@ -27,5 +27,5 @@ class SectionsPagerAdapter(private val mContext: Context, fm: FragmentManager) :
         return mContext.resources.getString(tabTables[position])
     }
 
-    override fun getCount(): Int = 2
+    override fun getCount(): Int = tabTables.size
 }
