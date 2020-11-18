@@ -1,6 +1,6 @@
 package com.fakhry.movie.utils
 
-import com.fakhry.movie.model.MovieAndTvShowEntity
+import com.fakhry.movie.data.source.local.entity.MovieAndTvShowEntity
 import java.util.*
 
 object DataDummy {

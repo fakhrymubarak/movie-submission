@@ -10,8 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fakhry.movie.R
-import com.fakhry.movie.model.MovieAndTvShowEntity
+import com.fakhry.movie.data.source.local.entity.MovieAndTvShowEntity
 import com.fakhry.movie.ui.details.DetailsActivity
+import com.fakhry.movie.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_tv_show.*
 
 
@@ -29,9 +30,9 @@ class TvShowFragment : Fragment() {
         showLoading(true)
 
         if (activity != null) {
+            val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(
-                this,
-                ViewModelProvider.NewInstanceFactory()
+                this, factory
             )[TvShowViewModel::class.java]
             val tvShows = viewModel.getTvShow()
 

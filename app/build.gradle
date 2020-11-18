@@ -52,6 +52,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$testJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
     androidTestImplementation "androidx.test:rules:$androidXTestVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
 
     //architecture component
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleVersion"

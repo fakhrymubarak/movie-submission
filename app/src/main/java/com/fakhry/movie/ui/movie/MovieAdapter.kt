@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.fakhry.movie.R
-import com.fakhry.movie.model.MovieAndTvShowEntity
+import com.fakhry.movie.data.source.local.entity.MovieAndTvShowEntity
 import kotlinx.android.synthetic.main.item_rows.view.*
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ListViewHolder>() {

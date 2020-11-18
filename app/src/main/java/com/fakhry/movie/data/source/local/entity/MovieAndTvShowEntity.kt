@@ -1,4 +1,4 @@
-package com.fakhry.movie.model
+package com.fakhry.movie.data.source.local.entity
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

@@ -1,14 +1,14 @@
 package com.fakhry.movie.ui.details
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.fakhry.movie.R
-import com.fakhry.movie.model.MovieAndTvShowEntity
+import com.fakhry.movie.data.source.local.entity.MovieAndTvShowEntity
+import com.fakhry.movie.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_details.*
 
 class DetailsActivity : AppCompatActivity(), View.OnClickListener {
@@ -35,9 +35,10 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setViewModel() {
+
+        val factory = ViewModelFactory.getInstance(this)
         val viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
+            this, factory
         )[DetailsViewModel::class.java]
 
         val extras = intent.extras
@@ -45,18 +46,17 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
         if (extras != null) {
             val idMovie = extras.getInt(EXTRA_MOVIE)
             val idTvShows = extras.getInt(EXTRA_TV)
-            Log.d("telolet", "${extras.containsKey(EXTRA_MOVIE)}")
 
             when {
                 extras.containsKey(EXTRA_MOVIE) -> {
                     viewModel.setSelectedItem(idMovie)
-                    val movies = viewModel.getMovies()
+                    val movies = viewModel.getMovieDetails(idMovie)
                     populateItem(movies)
                 }
 
                 extras.containsKey(EXTRA_TV) -> {
                     viewModel.setSelectedItem(idTvShows)
-                    val tvShows = viewModel.getTvShows()
+                    val tvShows = viewModel.getTvShoDetails(idTvShows)
                     populateItem(tvShows)
                 }
             }
