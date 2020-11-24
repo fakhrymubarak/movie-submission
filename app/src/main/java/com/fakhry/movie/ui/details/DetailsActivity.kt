@@ -56,7 +56,7 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
 
                 extras.containsKey(EXTRA_TV) -> {
                     viewModel.setSelectedItem(idTvShows)
-                    val tvShows = viewModel.getTvShoDetails(idTvShows)
+                    val tvShows = viewModel.getTvShowDetails(idTvShows)
                     populateItem(tvShows)
                 }
             }

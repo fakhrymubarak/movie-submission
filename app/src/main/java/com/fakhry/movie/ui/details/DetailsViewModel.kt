@@ -26,7 +26,7 @@ class DetailsViewModel(private val applicationRepository: ApplicationRepository)
 //         return movie
 //    }
 
-    fun getTvShoDetails(tvShowId : Int) : MovieAndTvShowEntity = applicationRepository.getTvShowDetails(tvShowId)
+    fun getTvShowDetails(tvShowId : Int) : MovieAndTvShowEntity = applicationRepository.getTvShowDetails(tvShowId)
 
 //    fun getTvShows(): MovieAndTvShowEntity {
 //        lateinit var tvShows: MovieAndTvShowEntity
