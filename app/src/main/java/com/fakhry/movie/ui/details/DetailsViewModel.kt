@@ -12,30 +12,8 @@ class DetailsViewModel(private val applicationRepository: ApplicationRepository)
         this.itemId = itemId
     }
 
-    fun getMovieDetails(movieId : Int) : MovieAndTvShowEntity = applicationRepository.getMovieDetails(movieId)
-
-
-//    fun getMovies(): MovieAndTvShowEntity {
-//        lateinit var movie: MovieAndTvShowEntity
-//        val moviesEntities = DataDummy.generateDummyMovie()
-//        for (movieEntity in moviesEntities) {
-//            if (movieEntity.id == itemId) {
-//                movie = movieEntity
-//            }
-//        }
-//         return movie
-//    }
-
     fun getTvShowDetails(tvShowId : Int) : MovieAndTvShowEntity = applicationRepository.getTvShowDetails(tvShowId)
 
-//    fun getTvShows(): MovieAndTvShowEntity {
-//        lateinit var tvShows: MovieAndTvShowEntity
-//        val tvShowsEntities = DataDummy.generateDummyTvShow()
-//        for (tvShow in tvShowsEntities) {
-//            if (tvShow.id == itemId) {
-//                tvShows = tvShow
-//            }
-//        }
-//        return tvShows
-//    }
+    fun getMovieDetails(movieId : Int) : MovieAndTvShowEntity = applicationRepository.getMovieDetails(movieId)
+
 }

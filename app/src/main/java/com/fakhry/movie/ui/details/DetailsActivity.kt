@@ -35,7 +35,6 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setViewModel() {
-
         val factory = ViewModelFactory.getInstance(this)
         val viewModel = ViewModelProvider(
             this, factory

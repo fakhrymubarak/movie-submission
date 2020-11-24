@@ -66,11 +66,11 @@ class ApplicationRepository private constructor(private val remoteDataSource: Re
         return movieDetails
     }
 
-    override fun getTvShowDetails(tvShow: Int): MovieAndTvShowEntity {
+    override fun getTvShowDetails(tvShowId: Int): MovieAndTvShowEntity {
         val tvShowResponse = remoteDataSource.getAllTvShows()
         lateinit var tvShowDetails: MovieAndTvShowEntity
         for (response in tvShowResponse) {
-            if (response.id == tvShow) {
+            if (response.id == tvShowId) {
                 tvShowDetails = MovieAndTvShowEntity(
                     response.id,
                     response.title,
