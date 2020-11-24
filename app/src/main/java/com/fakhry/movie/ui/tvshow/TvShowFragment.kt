@@ -20,7 +20,7 @@ class TvShowFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         return inflater.inflate(R.layout.fragment_tv_show, container, false)
     }
@@ -34,9 +34,10 @@ class TvShowFragment : Fragment() {
             val viewModel = ViewModelProvider(
                 this, factory
             )[TvShowViewModel::class.java]
-            val tvShows = viewModel.getTvShow()
+            viewModel.getTvShow().observe(this, { tvShows ->
+                showRecyclerView(tvShows)
+            })
 
-            showRecyclerView(tvShows)
         }
     }
 

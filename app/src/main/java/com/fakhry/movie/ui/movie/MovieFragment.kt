@@ -34,9 +34,10 @@ class MovieFragment : Fragment() {
             val viewModel = ViewModelProvider(
                 this, factory
             )[MovieViewModel::class.java]
-            val movies = viewModel.getMovies()
+            viewModel.getMovies().observe(this, { movies ->
 
-            showRecyclerView(movies)
+                showRecyclerView(movies)
+            })
         }
     }
 
