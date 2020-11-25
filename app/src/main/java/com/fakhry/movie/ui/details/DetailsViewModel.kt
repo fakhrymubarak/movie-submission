@@ -7,13 +7,18 @@ import com.fakhry.movie.data.source.local.entity.MovieAndTvShowEntity
 import kotlin.properties.Delegates
 
 class DetailsViewModel(private val applicationRepository: ApplicationRepository) : ViewModel() {
-    private var itemId by Delegates.notNull<Int>()
+    private var tvShowId by Delegates.notNull<Int>()
+    private var movieId by Delegates.notNull<Int>()
 
-    fun setSelectedItem(itemId: Int) {
-        this.itemId = itemId
+    fun setMovieSelected(itemId: Int) {
+        this.movieId = itemId
     }
 
-    fun getTvShowDetails(tvShowId : Int) : LiveData<MovieAndTvShowEntity> = applicationRepository.getTvShowDetails(tvShowId)
+    fun setTvShowSelected(itemId: Int) {
+        this.tvShowId = itemId
+    }
 
-    fun getMovieDetails(movieId : Int) : LiveData<MovieAndTvShowEntity> = applicationRepository.getMovieDetails(movieId)
+    fun getMovieDetails() : LiveData<MovieAndTvShowEntity> = applicationRepository.getMovieDetails(movieId)
+
+    fun getTvShowDetails() : LiveData<MovieAndTvShowEntity> = applicationRepository.getTvShowDetails(tvShowId)
 }

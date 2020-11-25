@@ -48,15 +48,15 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
 
             when {
                 extras.containsKey(EXTRA_MOVIE) -> {
-                    viewModel.setSelectedItem(idMovie)
-                    viewModel.getMovieDetails(idMovie).observe(this, { movieDetails ->
+                    viewModel.setMovieSelected(idMovie)
+                    viewModel.getMovieDetails().observe(this, { movieDetails ->
                         populateItem(movieDetails)
                     })
                 }
 
                 extras.containsKey(EXTRA_TV) -> {
-                    viewModel.setSelectedItem(idTvShows)
-                    viewModel.getTvShowDetails(idTvShows).observe(this, { tvShowDetails ->
+                    viewModel.setTvShowSelected(idTvShows)
+                    viewModel.getTvShowDetails().observe(this, { tvShowDetails ->
                         populateItem(tvShowDetails)
                     })
                 }

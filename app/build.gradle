@@ -48,12 +48,15 @@ dependencies {
     implementation "androidx.cardview:cardview:$cardviewVersion"
 
     //testing
-    testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$testJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
     androidTestImplementation "androidx.test:rules:$androidXTestVersion"
+    androidTestImplementation "androidx.arch.core:core-testing:$archLifecycleTestVersion"
+    testImplementation "junit:junit:$junitVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation "org.mockito:mockito-inline:$mockitoVersion"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
+    testImplementation "androidx.arch.core:core-testing:$archLifecycleTestVersion"
 
     //architecture component
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleVersion"

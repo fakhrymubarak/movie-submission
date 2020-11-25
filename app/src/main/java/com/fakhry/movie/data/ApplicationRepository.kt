@@ -33,6 +33,7 @@ class ApplicationRepository private constructor(private val remoteDataSource: Re
                     )
                     movieList.add(movies)
                 }
+                moviesResults.postValue(movieList)
             }
         })
         return moviesResults
@@ -54,6 +55,7 @@ class ApplicationRepository private constructor(private val remoteDataSource: Re
                     )
                     tvShowList.add(show)
                 }
+                tvShowsResult.postValue(tvShowList)
             }
         })
         return tvShowsResult
