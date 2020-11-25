@@ -38,11 +38,12 @@ class TvShowViewModelTest {
     @Test
     fun getTvShows() {
         val dummyTVShows = DataDummy.generateDummyTvShow()
-        val movies = MutableLiveData<List<MovieAndTvShowEntity>>()
+        val tvShows = MutableLiveData<List<MovieAndTvShowEntity>>()
+        tvShows.value = dummyTVShows
 
-        `when`(applicationRepository.getAllMovies()).thenReturn(movies)
+        `when`(applicationRepository.getAllTvShows()).thenReturn(tvShows)
         val moviesEntities = tvShowViewModel.getTvShow().value
-        verify(applicationRepository).getAllMovies()
+        verify(applicationRepository).getAllTvShows()
         assertNotNull(moviesEntities)
         assertEquals(10, moviesEntities?.size)
 

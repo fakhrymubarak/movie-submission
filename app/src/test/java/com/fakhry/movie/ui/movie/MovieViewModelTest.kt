@@ -39,6 +39,7 @@ class MovieViewModelTest {
     fun getMovies () {
         val dummyMovies = DataDummy.generateDummyMovie()
         val movies = MutableLiveData<List<MovieAndTvShowEntity>>()
+        movies.value = dummyMovies
 
         `when`(applicationRepository.getAllMovies()).thenReturn(movies)
         val moviesEntities = movieViewModel.getMovies().value

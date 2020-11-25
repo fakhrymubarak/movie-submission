@@ -6,7 +6,7 @@ import com.fakhry.movie.data.source.remote.response.MovieAndTvShowResponse
 import com.fakhry.movie.utils.JsonHelper
 
 class RemoteDataSource private constructor(private val jsonHelper: JsonHelper) {
-    private val handler = Handler(Looper.getMainLooper())
+    private val handler = Handler()
 
     companion object {
         private const val SERVICE_LATENCY_IN_MILLIS: Long = 2000
