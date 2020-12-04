@@ -60,7 +60,7 @@ class ApplicationRepositoryTest {
     @Test
     fun getMovieDetails() {
         doAnswer { invocation ->
-            (invocation.arguments[0] as RemoteDataSource.LoadMovieDetailsCallback).onMovieDetailsReceived(
+            (invocation.arguments[1] as RemoteDataSource.LoadMovieDetailsCallback).onMovieDetailsReceived(
                 movieDetails)
             null
         }.`when`(remote).getMovieDetails(eq(movieId), any())
@@ -77,12 +77,12 @@ class ApplicationRepositoryTest {
     @Test
     fun getTvShowDetails() {
         doAnswer { invocation ->
-            (invocation.arguments[0] as RemoteDataSource.LoadTvShowDetailsCallback).onTvShowDetailReceived(
+            (invocation.arguments[1] as RemoteDataSource.LoadTvShowDetailsCallback).onTvShowDetailReceived(
                 tvShowDetails)
             null
         }.`when`(remote).getTvShowDetails(eq(tvShowId), any())
         val tvShowDetailsEntity =
-            LiveDataTestUtil.getValue(applicationRepository.getMovieDetails(tvShowId))
+            LiveDataTestUtil.getValue(applicationRepository.getTvShowDetails(   tvShowId))
         verify(remote).getTvShowDetails(eq(tvShowId), any())
         assertNotNull(tvShowDetailsEntity)
         assertEquals(tvShowResponse[0].title, tvShowDetailsEntity.title)

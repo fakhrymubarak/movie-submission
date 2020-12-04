@@ -33,12 +33,11 @@ class RemoteDataSource private constructor(private val jsonHelper: JsonHelper) {
         handler.postDelayed({
             callback.onMovieDetailsReceived(jsonHelper.loadPopularMovieDetails(movieId))
         }, SERVICE_LATENCY_IN_MILLIS)
-
     }
 
-    fun getTvShowDetails(movieId: Int, callback: LoadTvShowDetailsCallback) {
+    fun getTvShowDetails(tvShowId: Int, callback: LoadTvShowDetailsCallback) {
         handler.postDelayed({
-            callback.onTvShowDetailReceived(jsonHelper.loadPopularTvShowDetails(movieId))
+            callback.onTvShowDetailReceived(jsonHelper.loadPopularTvShowDetails(tvShowId))
         }, SERVICE_LATENCY_IN_MILLIS)
     }
 

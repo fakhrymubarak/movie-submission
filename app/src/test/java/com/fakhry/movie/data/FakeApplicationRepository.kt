@@ -24,6 +24,7 @@ class FakeApplicationRepository(private val remoteDataSource: RemoteDataSource) 
                     )
                     movieList.add(movies)
                 }
+                moviesResults.postValue(movieList)
             }
         })
         return moviesResults
@@ -45,6 +46,7 @@ class FakeApplicationRepository(private val remoteDataSource: RemoteDataSource) 
                     )
                     tvShowList.add(show)
                 }
+                tvShowsResult.postValue(tvShowList)
             }
         })
         return tvShowsResult

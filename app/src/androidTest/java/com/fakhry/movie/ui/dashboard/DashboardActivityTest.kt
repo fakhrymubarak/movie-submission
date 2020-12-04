@@ -31,15 +31,18 @@ class DashboardActivityTest {
 
     @Test
     fun loadDetailMovies() {
+        Thread.sleep(2500)
         onView(withId(R.id.rv_movie)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
             0,
             click()))
+        Thread.sleep(2500)
         onView(withId(R.id.tv_title_details)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         onView(withId(R.id.tv_title_details)).check(ViewAssertions.matches(withText(dummyMovies[0].title)))
         onView(withId(R.id.tv_synopsis_details)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         onView(withId(R.id.tv_synopsis_details)).check(ViewAssertions.matches(withText(dummyMovies[0].synopsis)))
         onView(withId(R.id.tv_rating_details)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         onView(withId(R.id.tv_rating_details)).check(ViewAssertions.matches(withText(dummyMovies[0].rating.toString())))
+        onView(withId(R.id.rb_rating)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         onView(withId(R.id.btn_back)).perform(click())
         onView(withId(R.id.rv_movie)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
@@ -56,14 +59,17 @@ class DashboardActivityTest {
     @Test
     fun loadDetailTvShows() {
         onView(withText("TV Shows")).perform(click())
+        Thread.sleep(2500)
         onView(withId(R.id.rv_tv_show)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
             0,
             click()))
+        Thread.sleep(2500)
         onView(withId(R.id.tv_title_details)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         onView(withId(R.id.tv_title_details)).check(ViewAssertions.matches(withText(dummyTvShows[0].title)))
         onView(withId(R.id.tv_synopsis_details)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         onView(withId(R.id.tv_synopsis_details)).check(ViewAssertions.matches(withText(dummyTvShows[0].synopsis)))
         onView(withId(R.id.tv_rating_details)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         onView(withId(R.id.tv_rating_details)).check(ViewAssertions.matches(withText(dummyTvShows[0].rating.toString())))
+        onView(withId(R.id.rb_rating)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 }
