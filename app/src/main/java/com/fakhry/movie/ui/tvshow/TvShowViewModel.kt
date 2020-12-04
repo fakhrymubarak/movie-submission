@@ -1,11 +1,9 @@
 package com.fakhry.movie.ui.tvshow
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.fakhry.movie.data.ApplicationRepository
-import com.fakhry.movie.data.source.local.entity.MovieAndTvShowEntity
+import com.fakhry.movie.data.Repository
 
-class TvShowViewModel (private val applicationRepository: ApplicationRepository): ViewModel() {
-    fun getTvShow() : LiveData<List<MovieAndTvShowEntity>> = applicationRepository.getAllTvShows()
+class TvShowViewModel (private val repository: Repository): ViewModel() {
+//    fun getTvShow() : LiveData<List<MovieAndTvShowEntity>> = repository.getAllTvShows()
 
 }

@@ -10,18 +10,18 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.fakhry.movie.R
-import com.fakhry.movie.data.source.local.entity.MovieAndTvShowEntity
+import com.fakhry.movie.data.source.remote.response.movie.MovieResponse
 import kotlinx.android.synthetic.main.item_rows.view.*
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ListViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
-    private val listMovie = ArrayList<MovieAndTvShowEntity>()
+    private val listMovie = ArrayList<MovieResponse>()
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: MovieAndTvShowEntity)
+        fun onItemClicked(data: MovieResponse)
     }
 
-    fun setMovies(items: List<MovieAndTvShowEntity>) {
+    fun setMovies(items: List<MovieResponse>) {
         listMovie.clear()
         listMovie.addAll(items)
         notifyDataSetChanged()
@@ -39,13 +39,13 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ListViewHolder>() {
         circularProgressDrawable.centerRadius = 30f
         val movie = listMovie[position]
         Glide.with(holder.itemView.context)
-            .load(movie.poster_url)
+            .load("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+movie.posterPath)
             .apply(RequestOptions.placeholderOf(circularProgressDrawable))
             .error(R.drawable.ic_broken_image_24dp)
             .into(holder.ivAvatar)
         holder.tvTitle.text = movie.title
-        holder.tvSynopsis.text = movie.synopsis
-        holder.tvRating.text = movie.rating.toString()
+        holder.tvSynopsis.text = movie.overview
+        holder.tvRating.text = movie.voteAverage.toString()
         holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listMovie[position]) }
     }
 

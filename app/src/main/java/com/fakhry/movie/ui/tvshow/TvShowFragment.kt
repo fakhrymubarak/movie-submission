@@ -30,13 +30,13 @@ class TvShowFragment : Fragment() {
         showLoading(true)
 
         if (activity != null) {
-            val factory = ViewModelFactory.getInstance(requireActivity())
+            val factory = ViewModelFactory.getInstance()
             val viewModel = ViewModelProvider(
                 this, factory
             )[TvShowViewModel::class.java]
-            viewModel.getTvShow().observe(this, { tvShows ->
-                showRecyclerView(tvShows)
-            })
+//            viewModel.getTvShow().observe(this, { tvShows ->
+//                showRecyclerView(tvShows)
+//            })
 
         }
     }

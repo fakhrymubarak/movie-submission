@@ -1,45 +1,79 @@
 package com.fakhry.movie.data.source.remote
 
-import android.os.Handler
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.fakhry.movie.BuildConfig
+import com.fakhry.movie.data.source.remote.response.ApiConfig
 import com.fakhry.movie.data.source.remote.response.MovieAndTvShowResponse
-import com.fakhry.movie.utils.JsonHelper
+import com.fakhry.movie.data.source.remote.response.movie.GetMovieResponseModel
+import com.fakhry.movie.data.source.remote.response.movie.MovieResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class RemoteDataSource private constructor(private val jsonHelper: JsonHelper) {
-    private val handler = Handler()
+class RemoteDataSource {
+    private val service = ApiConfig.getApiService(ApiService.TMDB_BASE_URL)
 
     companion object {
-        private const val SERVICE_LATENCY_IN_MILLIS: Long = 2000
+        const val API_KEY = BuildConfig.TMDB_API_KEY
+        val TAG = RemoteDataSource::class.simpleName
 
         @Volatile
         private var instance: RemoteDataSource? = null
 
-        fun getInstance(helper: JsonHelper): RemoteDataSource =
+        fun getInstance(): RemoteDataSource =
             instance ?: synchronized(this) {
-                instance ?: RemoteDataSource(helper)
+                instance ?: RemoteDataSource()
             }
     }
 
-    fun getAllMovies(callback: LoadAllMoviesCallback) {
-        handler.postDelayed({ callback.onAllMoviesReceived(jsonHelper.loadPopularMovies()) },
-            SERVICE_LATENCY_IN_MILLIS)
+    fun getPopularMovies(): LiveData<List<MovieResponse>> {
+        val listPopularMovies = MutableLiveData<List<MovieResponse>>()
+        service.getPopularMovies(API_KEY).enqueue(object : Callback<GetMovieResponseModel> {
+            override fun onResponse(
+                call: Call<GetMovieResponseModel>,
+                response: Response<GetMovieResponseModel>,
+            ) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    val data = responseBody?.results
+                    listPopularMovies.postValue(data)
+                    Log.d("asdfa", "$data")
+//                    if (data != null) {
+//                        for (movies in data){
+//                            val movieResponse = MovieResponse(
+//                                movies
+//                            )
+//
+//                        }
+//                    }
+                }
+            }
+
+            override fun onFailure(call: Call<GetMovieResponseModel>, t: Throwable) {
+                Log.e(TAG, t.message.toString())
+            }
+        })
+        return listPopularMovies
     }
 
-    fun getAllTvShows(callback: LoadAllTvShowsCallback) {
-        handler.postDelayed({ callback.onAllTvShowReceived(jsonHelper.loadPopularTvShows()) },
-            SERVICE_LATENCY_IN_MILLIS)
-    }
-
-    fun getMovieDetails(movieId: Int, callback: LoadMovieDetailsCallback) {
-        handler.postDelayed({
-            callback.onMovieDetailsReceived(jsonHelper.loadPopularMovieDetails(movieId))
-        }, SERVICE_LATENCY_IN_MILLIS)
-    }
-
-    fun getTvShowDetails(tvShowId: Int, callback: LoadTvShowDetailsCallback) {
-        handler.postDelayed({
-            callback.onTvShowDetailReceived(jsonHelper.loadPopularTvShowDetails(tvShowId))
-        }, SERVICE_LATENCY_IN_MILLIS)
-    }
+//    fun getAllTvShows(callback: LoadAllTvShowsCallback) {
+//        handler.postDelayed({ callback.onAllTvShowReceived(jsonHelper.loadPopularTvShows()) },
+//            SERVICE_LATENCY_IN_MILLIS)
+//    }
+//
+//    fun getMovieDetails(movieId: Int, callback: LoadMovieDetailsCallback) {
+//        handler.postDelayed({
+//            callback.onMovieDetailsReceived(jsonHelper.loadPopularMovieDetails(movieId))
+//        }, SERVICE_LATENCY_IN_MILLIS)
+//    }
+//
+//    fun getTvShowDetails(tvShowId: Int, callback: LoadTvShowDetailsCallback) {
+//        handler.postDelayed({
+//            callback.onTvShowDetailReceived(jsonHelper.loadPopularTvShowDetails(tvShowId))
+//        }, SERVICE_LATENCY_IN_MILLIS)
+//    }
 
 
     interface LoadAllMoviesCallback {

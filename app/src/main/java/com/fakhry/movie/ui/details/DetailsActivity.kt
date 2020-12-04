@@ -36,7 +36,7 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setViewModel() {
-        val factory = ViewModelFactory.getInstance(this)
+        val factory = ViewModelFactory.getInstance()
         val viewModel = ViewModelProvider(
             this, factory
         )[DetailsViewModel::class.java]
@@ -48,18 +48,18 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
             val idTvShows = extras.getInt(EXTRA_TV)
 
             when {
-                extras.containsKey(EXTRA_MOVIE) -> {
-                    viewModel.setMovieSelected(idMovie)
-                    viewModel.getMovieDetails().observe(this, { movieDetails ->
-                        populateItem(movieDetails)
-                    })
-                }
+//                extras.containsKey(EXTRA_MOVIE) -> {
+//                    viewModel.setMovieSelected(idMovie)
+//                    viewModel.getMovieDetails().observe(this, { movieDetails ->
+//                        populateItem(movieDetails)
+//                    })
+//                }
 
                 extras.containsKey(EXTRA_TV) -> {
-                    viewModel.setTvShowSelected(idTvShows)
-                    viewModel.getTvShowDetails().observe(this, { tvShowDetails ->
-                        populateItem(tvShowDetails)
-                    })
+//                    viewModel.setTvShowSelected(idTvShows)
+//                    viewModel.getTvShowDetails().observe(this, { tvShowDetails ->
+//                        populateItem(tvShowDetails)
+//                    })
                 }
             }
 

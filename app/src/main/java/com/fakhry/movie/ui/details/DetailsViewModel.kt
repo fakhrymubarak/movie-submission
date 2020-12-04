@@ -1,12 +1,10 @@
 package com.fakhry.movie.ui.details
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.fakhry.movie.data.ApplicationRepository
-import com.fakhry.movie.data.source.local.entity.MovieAndTvShowEntity
+import com.fakhry.movie.data.Repository
 import kotlin.properties.Delegates
 
-class DetailsViewModel(private val applicationRepository: ApplicationRepository) : ViewModel() {
+class DetailsViewModel(private val repository: Repository) : ViewModel() {
     private var tvShowId by Delegates.notNull<Int>()
     private var movieId by Delegates.notNull<Int>()
 
@@ -18,7 +16,7 @@ class DetailsViewModel(private val applicationRepository: ApplicationRepository)
         this.tvShowId = itemId
     }
 
-    fun getMovieDetails() : LiveData<MovieAndTvShowEntity> = applicationRepository.getMovieDetails(movieId)
+//    fun getMovieDetails() : LiveData<MovieAndTvShowEntity> = repository.getMovieDetails(movieId)
 
-    fun getTvShowDetails() : LiveData<MovieAndTvShowEntity> = applicationRepository.getTvShowDetails(tvShowId)
+//    fun getTvShowDetails() : LiveData<MovieAndTvShowEntity> = repository.getTvShowDetails(tvShowId)
 }

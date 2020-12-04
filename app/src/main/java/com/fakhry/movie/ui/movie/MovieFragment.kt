@@ -2,6 +2,7 @@ package com.fakhry.movie.ui.movie
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fakhry.movie.R
-import com.fakhry.movie.data.source.local.entity.MovieAndTvShowEntity
+import com.fakhry.movie.data.source.remote.response.movie.MovieResponse
 import com.fakhry.movie.ui.details.DetailsActivity
 import com.fakhry.movie.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_movie.*
@@ -30,18 +31,18 @@ class MovieFragment : Fragment() {
         showLoading(true)
 
         if (activity != null) {
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            val viewModel = ViewModelProvider(
+            val factory = ViewModelFactory.getInstance()
+            val moviesViewModel = ViewModelProvider(
                 this, factory
             )[MovieViewModel::class.java]
-            viewModel.getMovies().observe(this, { movies ->
-
+            moviesViewModel.getPopularMovies().observe(this, { movies ->
+                Log.d("asdfa", "$movies")
                 showRecyclerView(movies)
             })
         }
     }
 
-    private fun showRecyclerView(movies: List<MovieAndTvShowEntity>) {
+    private fun showRecyclerView(movies: List<MovieResponse>) {
         rv_movie.setHasFixedSize(true)
         val movieAdapter = MovieAdapter()
         movieAdapter.setMovies(movies)
@@ -51,7 +52,7 @@ class MovieFragment : Fragment() {
         rv_movie.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
         rv_movie.adapter = movieAdapter
         movieAdapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: MovieAndTvShowEntity) {
+            override fun onItemClicked(data: MovieResponse) {
                 showSelectedUser(data.id)
             }
         })

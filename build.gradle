@@ -6,7 +6,7 @@ buildscript {
         //kotlin version
         kotlin_version = '1.4.10'
         coreVersion = '1.3.2'
-        corotinesVersion = '1.3.7'
+        corotinesVersion = '1.4.0'
 
         //ui
         appCompatVersion = '1.2.0'
@@ -31,6 +31,13 @@ buildscript {
         //Architecture Components
         archLifecycleTestVersion = '2.1.0'
         archLifecycleVersion = '2.2.0'
+
+
+        //retrofit version
+        retrofitVersion = '2.9.0'
+
+        //API respond checker
+        loggingInterceptorVersion = '4.9.0'
     }
     repositories {
         google()

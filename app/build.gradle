@@ -16,6 +16,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField 'String', "TMDB_API_KEY", tmdbApiKey
+        buildConfigField 'String', "TMDB_BASE_API", "\"https://api.themoviedb.org/3/\""
     }
 
     buildTypes {
@@ -61,4 +64,11 @@ dependencies {
 
     //architecture component
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleVersion"
+
+    //API RETROFIT
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    //API respond checker
+    implementation "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion"
 }
