@@ -4,16 +4,15 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.fakhry.movie.data.source.remote.RemoteDataSource
 import com.fakhry.movie.utils.DataDummy
 import com.fakhry.movie.utils.LiveDataTestUtil
-
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.doAnswer
+import com.nhaarman.mockitokotlin2.eq
+import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
-import org.junit.Test
 import org.junit.Rule
+import org.junit.Test
 import org.mockito.Mockito.mock
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.eq
-import com.nhaarman.mockitokotlin2.doAnswer
 
 class ApplicationRepositoryTest {
 

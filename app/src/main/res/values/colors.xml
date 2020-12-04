@@ -10,6 +10,6 @@
     <!--  APP THEME COLOR-->
     <color name="redTheme">#e4141e</color>
     <color name="blueDark">#102235</color>
-    <color name="blueDarkTransparent50">#80102235</color>
+    <color name="blueDarkTransparent20">#33102235</color>
     <color name="blueLight">#122c45</color>
 </resources>

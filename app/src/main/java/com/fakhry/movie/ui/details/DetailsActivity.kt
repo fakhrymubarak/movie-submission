@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.fakhry.movie.R
@@ -66,20 +67,23 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun populateItem(item: MovieAndTvShowEntity) {
+        val circularProgressDrawable = CircularProgressDrawable(this)
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
         Glide.with(this)
             .load(item.poster_url)
-            .apply(RequestOptions.placeholderOf(R.drawable.ic_refresh_24dp))
+            .apply(RequestOptions.placeholderOf(circularProgressDrawable))
             .error(R.drawable.ic_broken_image_24dp)
             .into(iv_poster)
         Glide.with(this)
             .load(item.backdrop_url)
-            .apply(RequestOptions.placeholderOf(R.drawable.ic_refresh_24dp))
+            .apply(RequestOptions.placeholderOf(circularProgressDrawable))
             .error(R.drawable.ic_broken_image_24dp)
             .into(iv_backdrop)
         tv_title_details.text = item.title
         tv_synopsis_details.text = item.synopsis
         tv_rating_details.text = item.rating.toString()
-        pb_rating.progress = (item.rating * 10).toInt()
+        rb_rating.rating = item.rating.toFloat() / 2
         showLoading(false)
     }
 

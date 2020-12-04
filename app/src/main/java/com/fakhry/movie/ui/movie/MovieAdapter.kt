@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.fakhry.movie.R
@@ -33,10 +34,13 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ListViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
+        val circularProgressDrawable = CircularProgressDrawable(holder.ivAvatar.context)
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
         val movie = listMovie[position]
         Glide.with(holder.itemView.context)
             .load(movie.poster_url)
-            .apply(RequestOptions.placeholderOf(R.drawable.ic_refresh_24dp))
+            .apply(RequestOptions.placeholderOf(circularProgressDrawable))
             .error(R.drawable.ic_broken_image_24dp)
             .into(holder.ivAvatar)
         holder.tvTitle.text = movie.title

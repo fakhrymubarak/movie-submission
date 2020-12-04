@@ -28,7 +28,7 @@
         <ImageView
             android:id="@+id/iv_backdrop"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="300dp"
             android:contentDescription="@string/cd_movie_backdrop"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
 
         <ImageView
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="300dp"
             android:contentDescription="@string/cd_movie_backdrop"
             android:src="@drawable/shape_rectangle_gradient_blue_transparent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -89,19 +89,17 @@
             app:layout_constraintStart_toStartOf="@+id/tv_title_details"
             app:layout_constraintTop_toBottomOf="@+id/tv_title_details" />
 
-        <ProgressBar
-            android:id="@+id/pb_rating"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:max="100"
-            android:progress="62"
+        <RatingBar
+            android:id="@+id/rb_rating"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:numStars="5"
+            android:rating="0"
             android:progressBackgroundTint="@color/white"
             android:progressTint="@color/redTheme"
             app:layout_constraintBottom_toBottomOf="@+id/tv_rating_details"
-            app:layout_constraintEnd_toStartOf="@+id/cardView"
             app:layout_constraintStart_toEndOf="@+id/tv_rating_details"
             app:layout_constraintTop_toTopOf="@+id/tv_rating_details" />
 
@@ -113,7 +111,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/synopsis"
             app:layout_constraintStart_toStartOf="@+id/tv_title_details"
-            app:layout_constraintTop_toBottomOf="@+id/pb_rating" />
+            app:layout_constraintTop_toBottomOf="@+id/rb_rating" />
 
         <TextView
             android:id="@+id/tv_synopsis_details"

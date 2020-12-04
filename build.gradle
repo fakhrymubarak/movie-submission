@@ -15,6 +15,7 @@ buildscript {
         glideVersion = '4.11.0'
         recyclerViewVersion = '1.1.0'
         cardviewVersion ='1.0.0'
+        swipeRefreshVersion = '1.1.0'
 
         //testing
         junitVersion = '4.13.1'

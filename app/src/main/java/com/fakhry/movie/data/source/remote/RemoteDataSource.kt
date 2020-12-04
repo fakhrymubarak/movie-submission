@@ -1,7 +1,6 @@
 package com.fakhry.movie.data.source.remote
 
 import android.os.Handler
-import android.os.Looper
 import com.fakhry.movie.data.source.remote.response.MovieAndTvShowResponse
 import com.fakhry.movie.utils.JsonHelper
 
