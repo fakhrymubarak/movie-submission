@@ -41,21 +41,23 @@ class Repository(private val remoteRepository: RemoteRepository) :
 
     override fun getMovieDetails(movieId: Int): LiveData<MovieDetailsResponse> {
         val movieDetails = MutableLiveData<MovieDetailsResponse>()
-        remoteRepository.getMovieDetails(object : RemoteRepository.LoadMovieDetailsCallback {
-            override fun onMovieDetailsReceived(movieDetailsResponse: MovieDetailsResponse) {
-                movieDetails.postValue(movieDetailsResponse)
-            }
-        }, movieId)
+        remoteRepository.getMovieDetails(movieId,
+            object : RemoteRepository.LoadMovieDetailsCallback {
+                override fun onMovieDetailsReceived(movieDetailsResponse: MovieDetailsResponse) {
+                    movieDetails.postValue(movieDetailsResponse)
+                }
+            })
         return movieDetails
     }
 
     override fun getTvShowDetails(tvShowId: Int): LiveData<TvShowDetailsResponse> {
         val tvShowDetails = MutableLiveData<TvShowDetailsResponse>()
-        remoteRepository.getTvShowDetails(object : RemoteRepository.LoadTvShowDetailsCallback {
-            override fun onTvShowDetailReceived(tVShowDetailResponse: TvShowDetailsResponse) {
-                tvShowDetails.postValue(tVShowDetailResponse)
-            }
-        }, tvShowId)
+        remoteRepository.getTvShowDetails(tvShowId,
+            object : RemoteRepository.LoadTvShowDetailsCallback {
+                override fun onTvShowDetailReceived(tVShowDetailResponse: TvShowDetailsResponse) {
+                    tvShowDetails.postValue(tVShowDetailResponse)
+                }
+            })
         return tvShowDetails
     }
 }

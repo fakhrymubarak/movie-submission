@@ -68,7 +68,7 @@ class RemoteRepository {
     }
 
 
-    fun getMovieDetails(callback: LoadMovieDetailsCallback, movieId: Int) {
+    fun getMovieDetails(movieId: Int, callback: LoadMovieDetailsCallback) {
         service.getMovieDetails(movieId, API_KEY).enqueue(object : Callback<MovieDetailsResponse> {
             override fun onResponse(
                 call: Call<MovieDetailsResponse>,
@@ -86,7 +86,7 @@ class RemoteRepository {
         })
     }
 
-    fun getTvShowDetails(callback: LoadTvShowDetailsCallback, tvShowId: Int) {
+    fun getTvShowDetails(tvShowId: Int, callback: LoadTvShowDetailsCallback) {
         service.getTvShowDetails(tvShowId, API_KEY)
             .enqueue(object : Callback<TvShowDetailsResponse> {
                 override fun onResponse(

@@ -6,7 +6,6 @@ import com.fakhry.movie.data.source.remote.response.movie.details.MovieDetailsRe
 import com.fakhry.movie.data.source.remote.response.movie.popular.GetMovieResponseModel
 import com.fakhry.movie.data.source.remote.response.tvshow.details.TvShowDetailsResponse
 import com.fakhry.movie.data.source.remote.response.tvshow.popular.GetTvShowResponseModel
-import com.fakhry.movie.data.source.remote.response.tvshow.popular.TvShowResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

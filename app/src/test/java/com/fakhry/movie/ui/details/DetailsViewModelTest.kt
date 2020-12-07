@@ -30,6 +30,8 @@ class DetailsViewModelTest {
 
     @Mock
     private lateinit var movieDetailsObserver: Observer<MovieDetailsResponse>
+
+    @Mock
     private lateinit var tvShowDetailsObserver: Observer<TvShowDetailsResponse>
 
     private val dummyMovies = DataDummy.generateRemoteDummyMovieDetails(1)

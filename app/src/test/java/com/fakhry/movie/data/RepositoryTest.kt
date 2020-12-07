@@ -54,37 +54,39 @@ class RepositoryTest {
         assertEquals(movieResponse.size.toLong(), moviesEntities.size.toLong())
     }
 
-//    @Test
-//    fun getMovieDetails() {
-//        doAnswer { invocation ->
-//            (invocation.arguments[1] as RemoteDataSource.LoadMovieDetailsCallback).onMovieDetailsReceived(
-//                movieDetails)
-//            null
-//        }.`when`(remote).getMovieDetails(eq(movieId), any())
-//        val movieDetailsEntities =
-//            LiveDataTestUtil.getValue(applicationRepository.getMovieDetails(movieId))
-//        verify(remote).getMovieDetails(eq(movieId), any())
-//        assertNotNull(movieDetailsEntities)
-//        assertEquals(movieResponse[0].title, movieDetailsEntities.title)
-//        assertEquals(movieResponse[0].synopsis, movieDetailsEntities.synopsis)
-//        assertEquals(movieResponse[0].poster_url, movieDetailsEntities.poster_url)
-//        assertEquals(movieResponse[0].backdrop_url, movieDetailsEntities.backdrop_url)
-//    }
-//
-//    @Test
-//    fun getTvShowDetails() {
-//        doAnswer { invocation ->
-//            (invocation.arguments[1] as RemoteDataSource.LoadTvShowDetailsCallback).onTvShowDetailReceived(
-//                tvShowDetails)
-//            null
-//        }.`when`(remote).getTvShowDetails(eq(tvShowId), any())
-//        val tvShowDetailsEntity =
-//            LiveDataTestUtil.getValue(applicationRepository.getTvShowDetails(   tvShowId))
-//        verify(remote).getTvShowDetails(eq(tvShowId), any())
-//        assertNotNull(tvShowDetailsEntity)
-//        assertEquals(tvShowResponse[0].title, tvShowDetailsEntity.title)
-//        assertEquals(tvShowResponse[0].synopsis, tvShowDetailsEntity.synopsis)
-//        assertEquals(tvShowResponse[0].poster_url, tvShowDetailsEntity.poster_url)
-//        assertEquals(tvShowResponse[0].backdrop_url, tvShowDetailsEntity.backdrop_url)
-//    }
+    @Test
+    fun getMovieDetails() {
+        doAnswer { invocation ->
+            (invocation.arguments[1] as RemoteRepository.LoadMovieDetailsCallback).onMovieDetailsReceived(
+                movieDetails)
+            null
+        }.`when`(remote).getMovieDetails(eq(movieId), any())
+        val movieDetailsEntities =
+            LiveDataTestUtil.getValue(repository.getMovieDetails(movieId))
+        verify(remote).getMovieDetails(eq(movieId), any())
+        assertNotNull(movieDetailsEntities)
+        assertEquals(movieResponse[0].title, movieDetailsEntities.title)
+        assertEquals(movieResponse[0].overview, movieDetailsEntities.overview)
+        assertEquals(movieResponse[0].posterPath, movieDetailsEntities.posterPath)
+        assertEquals(movieResponse[0].backdropPath, movieDetailsEntities.backdropPath)
+        assertEquals(movieResponse[0].voteAverage, movieDetailsEntities.voteAverage)
+    }
+
+    @Test
+    fun getTvShowDetails() {
+        doAnswer { invocation ->
+            (invocation.arguments[1] as RemoteRepository.LoadTvShowDetailsCallback).onTvShowDetailReceived(
+                tvShowDetails)
+            null
+        }.`when`(remote).getTvShowDetails(eq(tvShowId), any())
+        val tvShowDetailsEntity =
+            LiveDataTestUtil.getValue(repository.getTvShowDetails(tvShowId))
+        verify(remote).getTvShowDetails(eq(tvShowId), any())
+        assertNotNull(tvShowDetailsEntity)
+        assertEquals(tvShowResponse[0].name, tvShowDetailsEntity.name)
+        assertEquals(tvShowResponse[0].overview, tvShowDetailsEntity.overview)
+        assertEquals(tvShowResponse[0].posterPath, tvShowDetailsEntity.posterPath)
+        assertEquals(tvShowResponse[0].backdropPath, tvShowDetailsEntity.backdropPath)
+        assertEquals(tvShowResponse[0].voteAverage, tvShowDetailsEntity.voteAverage)
+    }
 }
