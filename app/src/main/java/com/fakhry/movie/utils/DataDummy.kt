@@ -2,11 +2,12 @@ package com.fakhry.movie.utils
 
 import com.fakhry.movie.data.source.local.entity.MovieAndTvShowEntity
 import com.fakhry.movie.data.source.remote.response.MovieAndTvShowResponse
+import com.fakhry.movie.data.source.remote.response.movie.MovieResponse
 import java.util.*
 
 object DataDummy {
 
-    fun generateDummyMovie(): ArrayList<MovieAndTvShowEntity> {
+    fun generateDummyMovie(): ArrayList<MovieResponse> {
         val movieId = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
         val movieTitle = arrayOf(
@@ -64,10 +65,10 @@ object DataDummy {
 
         val rating = doubleArrayOf(6.1, 5.0, 7.0, 8.3, 4.9, 7.3, 6.3, 7.7, 7.5, 6.4)
 
-        val movieList = ArrayList<MovieAndTvShowEntity>()
+        val movieList = ArrayList<MovieResponse>()
 
         for (i in movieId.indices) {
-            val movie = MovieAndTvShowEntity(
+            val movie = MovieResponse(
                 movieId[i],
                 movieTitle[i],
                 movieSynopsis[i],
