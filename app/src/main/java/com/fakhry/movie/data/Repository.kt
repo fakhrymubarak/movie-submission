@@ -1,27 +1,43 @@
 package com.fakhry.movie.data
 
 import androidx.lifecycle.LiveData
-import com.fakhry.movie.data.source.remote.RemoteDataSource
+import androidx.lifecycle.MutableLiveData
+import com.fakhry.movie.data.source.remote.RemoteRepository
 import com.fakhry.movie.data.source.remote.response.movie.popular.MovieResponse
 import com.fakhry.movie.data.source.remote.response.tvshow.popular.TvShowResponse
 
-class Repository private constructor(private val remoteDataSource: RemoteDataSource) :
+class Repository(private val remoteRepository: RemoteRepository) :
     DataSource {
     companion object {
+        val TAG = Repository::class.simpleName
+
         @Volatile
         private var instance: Repository? = null
-        fun getInstance(remoteDataSource: RemoteDataSource): Repository =
+        fun getInstance(remoteRepository: RemoteRepository): Repository =
             instance ?: synchronized(this) {
-                instance ?: Repository(remoteDataSource)
+                instance ?: Repository(remoteRepository)
             }
     }
 
-    override fun getPopularMovies(): LiveData<List<MovieResponse>> =
-        remoteDataSource.getPopularMovies()
+    override fun getPopularMovies(): LiveData<List<MovieResponse>> {
+        val listPopularMovies = MutableLiveData<List<MovieResponse>>()
+        remoteRepository.getPopularMovies(object : RemoteRepository.LoadAllMoviesCallback {
+            override fun onAllMoviesReceived(movieResponses: List<MovieResponse>) {
+                listPopularMovies.postValue(movieResponses)
+            }
+        })
+        return listPopularMovies
+    }
 
-    override fun getPopularTvShows(): LiveData<List<TvShowResponse>> =
-        remoteDataSource.getPopularTvShows()
-
+    override fun getPopularTvShows(): LiveData<List<TvShowResponse>> {
+        val listPopularTvShow = MutableLiveData<List<TvShowResponse>>()
+        remoteRepository.getPopularTvShows(object : RemoteRepository.LoadAllTvShowsCallback {
+            override fun onAllTvShowReceived(tvShowResponses: List<TvShowResponse>) {
+                listPopularTvShow.postValue(tvShowResponses)
+            }
+        })
+        return listPopularTvShow
+    }
 
 //    override fun getAllTvShows(): LiveData<List<MovieAndTvShowEntity>> {
 //        val tvShowsResult = MutableLiveData<List<MovieAndTvShowEntity>>()

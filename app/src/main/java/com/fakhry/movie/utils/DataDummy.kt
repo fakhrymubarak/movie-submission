@@ -1,8 +1,8 @@
 package com.fakhry.movie.utils
 
-import com.fakhry.movie.data.source.local.entity.MovieAndTvShowEntity
 import com.fakhry.movie.data.source.remote.response.MovieAndTvShowResponse
 import com.fakhry.movie.data.source.remote.response.movie.popular.MovieResponse
+import com.fakhry.movie.data.source.remote.response.tvshow.popular.TvShowResponse
 import java.util.*
 
 object DataDummy {
@@ -81,7 +81,7 @@ object DataDummy {
         return movieList
     }
 
-    fun generateDummyTvShow(): ArrayList<MovieAndTvShowEntity> {
+    fun generateDummyTvShow(): ArrayList<TvShowResponse> {
         val tvShowId = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
         val tvShowTitle = arrayOf(
@@ -139,10 +139,10 @@ object DataDummy {
 
         val rating = doubleArrayOf(8.6, 8.5, 7.4, 8.5, 8.4, 8.9, 7.7, 8.1, 8.0, 7.7)
 
-        val tvShowList = ArrayList<MovieAndTvShowEntity>()
+        val tvShowList = ArrayList<TvShowResponse>()
 
         for (i in tvShowId.indices) {
-            val tvShow = MovieAndTvShowEntity(
+            val tvShow = TvShowResponse(
                 tvShowId[i],
                 tvShowTitle[i],
                 tvShowSynopsis[i],
@@ -155,7 +155,7 @@ object DataDummy {
         return tvShowList
     }
 
-    fun generateRemoteDummyMovies(): List<MovieAndTvShowResponse> {
+    fun generateRemoteDummyMovies(): List<MovieResponse> {
         val movieId = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
         val movieTitle = arrayOf(
@@ -213,10 +213,10 @@ object DataDummy {
 
         val rating = doubleArrayOf(6.1, 5.0, 7.0, 8.3, 4.9, 7.3, 6.3, 7.7, 7.5, 6.4)
 
-        val movieList = ArrayList<MovieAndTvShowResponse>()
+        val movieList = ArrayList<MovieResponse>()
 
         for (i in movieId.indices) {
-            val movie = MovieAndTvShowResponse(
+            val movie = MovieResponse(
                 movieId[i],
                 movieTitle[i],
                 movieSynopsis[i],
@@ -229,7 +229,7 @@ object DataDummy {
         return movieList
     }
 
-    fun generateRemoteDummyTvShows(): List<MovieAndTvShowResponse> {
+    fun generateRemoteDummyTvShows(): List<TvShowResponse> {
         val tvShowId = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
         val tvShowTitle = arrayOf(
@@ -287,10 +287,10 @@ object DataDummy {
 
         val rating = doubleArrayOf(8.6, 8.5, 7.4, 8.5, 8.4, 8.9, 7.7, 8.1, 8.0, 7.7)
 
-        val tvShowList = ArrayList<MovieAndTvShowResponse>()
+        val tvShowList = ArrayList<TvShowResponse>()
 
         for (i in tvShowId.indices) {
-            val tvShow = MovieAndTvShowResponse(
+            val tvShow = TvShowResponse(
                 tvShowId[i],
                 tvShowTitle[i],
                 tvShowSynopsis[i],

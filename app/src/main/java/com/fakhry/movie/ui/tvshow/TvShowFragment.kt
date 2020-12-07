@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fakhry.movie.R
-import com.fakhry.movie.data.source.local.entity.MovieAndTvShowEntity
 import com.fakhry.movie.data.source.remote.response.tvshow.popular.TvShowResponse
 import com.fakhry.movie.ui.details.DetailsActivity
 import com.fakhry.movie.viewmodel.ViewModelFactory

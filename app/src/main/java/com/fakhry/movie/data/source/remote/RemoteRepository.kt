@@ -1,8 +1,6 @@
 package com.fakhry.movie.data.source.remote
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.fakhry.movie.BuildConfig
 import com.fakhry.movie.data.source.remote.response.ApiConfig
 import com.fakhry.movie.data.source.remote.response.MovieAndTvShowResponse
@@ -14,24 +12,23 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RemoteDataSource {
+class RemoteRepository {
     private val service = ApiConfig.getApiService(ApiService.TMDB_BASE_URL)
 
     companion object {
         const val API_KEY = BuildConfig.TMDB_API_KEY
-        val TAG = RemoteDataSource::class.simpleName
+        val TAG = RemoteRepository::class.simpleName
 
         @Volatile
-        private var instance: RemoteDataSource? = null
+        private var instance: RemoteRepository? = null
 
-        fun getInstance(): RemoteDataSource =
+        fun getInstance(): RemoteRepository =
             instance ?: synchronized(this) {
-                instance ?: RemoteDataSource()
+                instance ?: RemoteRepository()
             }
     }
 
-    fun getPopularMovies(): LiveData<List<MovieResponse>> {
-        val listPopularMovies = MutableLiveData<List<MovieResponse>>()
+    fun getPopularMovies(callback: LoadAllMoviesCallback) {
         service.getPopularMovies(API_KEY).enqueue(object : Callback<GetMovieResponseModel> {
             override fun onResponse(
                 call: Call<GetMovieResponseModel>,
@@ -40,16 +37,7 @@ class RemoteDataSource {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     val data = responseBody?.results
-                    listPopularMovies.postValue(data)
-                    Log.d("asdfa", "$data")
-//                    if (data != null) {
-//                        for (movies in data){
-//                            val movieResponse = MovieResponse(
-//                                movies
-//                            )
-//
-//                        }
-//                    }
+                    data?.let { callback.onAllMoviesReceived(it) }
                 }
             }
 
@@ -57,11 +45,9 @@ class RemoteDataSource {
                 Log.e(TAG, t.message.toString())
             }
         })
-        return listPopularMovies
     }
 
-    fun getPopularTvShows(): LiveData<List<TvShowResponse>> {
-        val listPopularTvShow = MutableLiveData<List<TvShowResponse>>()
+    fun getPopularTvShows(callback: LoadAllTvShowsCallback){
         service.getPopularTvShows(API_KEY).enqueue(object : Callback<GetTvShowResponseModel> {
             override fun onResponse(
                 call: Call<GetTvShowResponseModel>,
@@ -70,7 +56,7 @@ class RemoteDataSource {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     val data = responseBody?.results
-                    listPopularTvShow.postValue(data)
+                    data?.let { callback.onAllTvShowReceived(it) }
                 }
             }
 
@@ -78,7 +64,6 @@ class RemoteDataSource {
                 Log.e(TAG, t.message.toString())
             }
         })
-        return listPopularTvShow
     }
 
 //    fun getAllTvShows(callback: LoadAllTvShowsCallback) {
@@ -100,11 +85,11 @@ class RemoteDataSource {
 
 
     interface LoadAllMoviesCallback {
-        fun onAllMoviesReceived(movieResponses: List<MovieAndTvShowResponse>)
+        fun onAllMoviesReceived(movieResponses: List<MovieResponse>)
     }
 
     interface LoadAllTvShowsCallback {
-        fun onAllTvShowReceived(tvShowResponses: List<MovieAndTvShowResponse>)
+        fun onAllTvShowReceived(tvShowResponses: List<TvShowResponse>)
     }
 
     interface LoadMovieDetailsCallback {
