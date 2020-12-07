@@ -10,6 +10,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.fakhry.movie.R
 import com.fakhry.movie.data.source.remote.response.movie.details.MovieDetailsResponse
 import com.fakhry.movie.data.source.remote.response.tvshow.details.TvShowDetailsResponse
+import com.fakhry.movie.utils.EspressoIdlingResource
 import com.fakhry.movie.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_details.*
 
@@ -50,16 +51,20 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
 
             when {
                 extras.containsKey(EXTRA_MOVIE) -> {
+                    EspressoIdlingResource.increment()
                     detailsViewModel.setMovieSelected(idMovie)
                     detailsViewModel.getMovieDetails().observe(this, { movieDetails ->
                         populateItem(movieDetails)
+                        EspressoIdlingResource.decrement()
                     })
                 }
 
                 extras.containsKey(EXTRA_TV) -> {
+                    EspressoIdlingResource.increment()
                     detailsViewModel.setTvShowSelected(idTvShows)
                     detailsViewModel.getTvShowDetails().observe(this, { tvShowDetails ->
                         populateItem(tvShowDetails)
+                        EspressoIdlingResource.decrement()
                     })
                 }
             }

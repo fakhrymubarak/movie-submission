@@ -2,7 +2,6 @@ package com.fakhry.movie.ui.movie
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.fakhry.movie.R
 import com.fakhry.movie.data.source.remote.response.movie.popular.MovieResponse
 import com.fakhry.movie.ui.details.DetailsActivity
+import com.fakhry.movie.utils.EspressoIdlingResource
 import com.fakhry.movie.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_movie.*
 
@@ -35,9 +35,10 @@ class MovieFragment : Fragment() {
             val moviesViewModel = ViewModelProvider(
                 this, factory
             )[MovieViewModel::class.java]
+            EspressoIdlingResource.increment()
             moviesViewModel.getPopularMovies().observe(this, { movies ->
-                Log.d("asdfa", "$movies")
                 showRecyclerView(movies)
+                EspressoIdlingResource.decrement()
             })
         }
     }
@@ -47,7 +48,6 @@ class MovieFragment : Fragment() {
         val movieAdapter = MovieAdapter()
         movieAdapter.setMovies(movies)
         movieAdapter.notifyDataSetChanged()
-
         rv_movie.layoutManager = LinearLayoutManager(context)
         rv_movie.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
         rv_movie.adapter = movieAdapter

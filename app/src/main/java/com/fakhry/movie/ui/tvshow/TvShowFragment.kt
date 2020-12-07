@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.fakhry.movie.R
 import com.fakhry.movie.data.source.remote.response.tvshow.popular.TvShowResponse
 import com.fakhry.movie.ui.details.DetailsActivity
+import com.fakhry.movie.utils.EspressoIdlingResource
 import com.fakhry.movie.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_tv_show.*
 
@@ -34,8 +35,10 @@ class TvShowFragment : Fragment() {
             val tvShowViewModel = ViewModelProvider(
                 this, factory
             )[TvShowViewModel::class.java]
+            EspressoIdlingResource.increment()
             tvShowViewModel.getPopularTvShows().observe(this, { tvShows ->
                 showRecyclerView(tvShows)
+                EspressoIdlingResource.decrement()
             })
 
         }
