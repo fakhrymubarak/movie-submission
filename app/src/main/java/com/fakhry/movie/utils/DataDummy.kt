@@ -1,7 +1,9 @@
 package com.fakhry.movie.utils
 
 import com.fakhry.movie.data.source.remote.response.MovieAndTvShowResponse
+import com.fakhry.movie.data.source.remote.response.movie.details.MovieDetailsResponse
 import com.fakhry.movie.data.source.remote.response.movie.popular.MovieResponse
+import com.fakhry.movie.data.source.remote.response.tvshow.details.TvShowDetailsResponse
 import com.fakhry.movie.data.source.remote.response.tvshow.popular.TvShowResponse
 import java.util.*
 
@@ -303,7 +305,7 @@ object DataDummy {
         return tvShowList
     }
 
-    fun generateRemoteDummyMovieDetails(pmMovieId: Int): MovieAndTvShowResponse {
+    fun generateRemoteDummyMovieDetails(pmMovieId: Int): MovieDetailsResponse {
         val movieId = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
         val movieTitle = arrayOf(
@@ -362,11 +364,11 @@ object DataDummy {
         val rating = doubleArrayOf(6.1, 5.0, 7.0, 8.3, 4.9, 7.3, 6.3, 7.7, 7.5, 6.4)
 
 
-        lateinit var movie: MovieAndTvShowResponse
+        lateinit var movie: MovieDetailsResponse
 
         for (i in movieId.indices) {
             if (pmMovieId == movieId[i]) {
-                movie = MovieAndTvShowResponse(
+                movie = MovieDetailsResponse(
                     movieId[i],
                     movieTitle[i],
                     movieSynopsis[i],
@@ -379,7 +381,7 @@ object DataDummy {
         return movie
     }
 
-    fun generateRemoteDummyTvShowDetails(pmTvShowId: Int): MovieAndTvShowResponse {
+    fun generateRemoteDummyTvShowDetails(pmTvShowId: Int): TvShowDetailsResponse {
         val tvShowId = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
         val tvShowTitle = arrayOf(
@@ -437,11 +439,11 @@ object DataDummy {
 
         val rating = doubleArrayOf(8.6, 8.5, 7.4, 8.5, 8.4, 8.9, 7.7, 8.1, 8.0, 7.7)
 
-        lateinit var tvShow: MovieAndTvShowResponse
+        lateinit var tvShow: TvShowDetailsResponse
 
         for (i in tvShowId.indices) {
             if (pmTvShowId == tvShowId[i]) {
-                tvShow = MovieAndTvShowResponse(
+                tvShow = TvShowDetailsResponse(
                     tvShowId[i],
                     tvShowTitle[i],
                     tvShowSynopsis[i],
@@ -451,7 +453,6 @@ object DataDummy {
                 break
             }
         }
-
         return tvShow
     }
 }

@@ -1,11 +1,11 @@
 package com.fakhry.movie.data
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.fakhry.movie.data.source.remote.RemoteRepository
 import com.fakhry.movie.data.source.remote.response.movie.details.MovieDetailsResponse
 import com.fakhry.movie.data.source.remote.response.movie.popular.MovieResponse
+import com.fakhry.movie.data.source.remote.response.tvshow.details.TvShowDetailsResponse
 import com.fakhry.movie.data.source.remote.response.tvshow.popular.TvShowResponse
 
 class Repository(private val remoteRepository: RemoteRepository) :
@@ -40,7 +40,6 @@ class Repository(private val remoteRepository: RemoteRepository) :
     }
 
     override fun getMovieDetails(movieId: Int): LiveData<MovieDetailsResponse> {
-        Log.d("asfas", "1 movie id = $movieId")
         val movieDetails = MutableLiveData<MovieDetailsResponse>()
         remoteRepository.getMovieDetails(object : RemoteRepository.LoadMovieDetailsCallback {
             override fun onMovieDetailsReceived(movieDetailsResponse: MovieDetailsResponse) {
@@ -49,46 +48,14 @@ class Repository(private val remoteRepository: RemoteRepository) :
         }, movieId)
         return movieDetails
     }
-//
-//    fun getTvShowDetails(tvShowId: Int): LiveData<TvShowDetailsResponse> {
-//        TODO("Not yet implemented")
-//    }
 
-//    override fun getMovieDetails(movieId: Int): LiveData<MovieAndTvShowEntity> {
-//        val moviesResult = MutableLiveData<MovieAndTvShowEntity>()
-//        remoteDataSource.getMovieDetails(movieId,
-//            object : RemoteDataSource.LoadMovieDetailsCallback {
-//                override fun onMovieDetailsReceived(movieDetailResponse: MovieAndTvShowResponse) {
-//                    val movieResponse = MovieAndTvShowEntity(
-//                        movieDetailResponse.id,
-//                        movieDetailResponse.title,
-//                        movieDetailResponse.synopsis,
-//                        movieDetailResponse.poster_url,
-//                        movieDetailResponse.backdrop_url,
-//                        movieDetailResponse.rating
-//                    )
-//                    moviesResult.postValue(movieResponse)
-//                }
-//            })
-//        return moviesResult
-//    }
-//
-//    override fun getTvShowDetails(tvShowId: Int): LiveData<MovieAndTvShowEntity> {
-//        val tvShowResult = MutableLiveData<MovieAndTvShowEntity>()
-//        remoteDataSource.getTvShowDetails(tvShowId,
-//            object : RemoteDataSource.LoadTvShowDetailsCallback {
-//                override fun onTvShowDetailReceived(tVShowDetailResponse: MovieAndTvShowResponse) {
-//                    val tvShowResponse = MovieAndTvShowEntity(
-//                        tVShowDetailResponse.id,
-//                        tVShowDetailResponse.title,
-//                        tVShowDetailResponse.synopsis,
-//                        tVShowDetailResponse.poster_url,
-//                        tVShowDetailResponse.backdrop_url,
-//                        tVShowDetailResponse.rating
-//                    )
-//                    tvShowResult.postValue(tvShowResponse)
-//                }
-//            })
-//        return tvShowResult
-//    }
+    override fun getTvShowDetails(tvShowId: Int): LiveData<TvShowDetailsResponse> {
+        val tvShowDetails = MutableLiveData<TvShowDetailsResponse>()
+        remoteRepository.getTvShowDetails(object : RemoteRepository.LoadTvShowDetailsCallback {
+            override fun onTvShowDetailReceived(tVShowDetailResponse: TvShowDetailsResponse) {
+                tvShowDetails.postValue(tVShowDetailResponse)
+            }
+        }, tvShowId)
+        return tvShowDetails
+    }
 }

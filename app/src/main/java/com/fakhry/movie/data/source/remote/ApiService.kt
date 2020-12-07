@@ -4,7 +4,9 @@ package com.fakhry.movie.data.source.remote
 import com.fakhry.movie.BuildConfig
 import com.fakhry.movie.data.source.remote.response.movie.details.MovieDetailsResponse
 import com.fakhry.movie.data.source.remote.response.movie.popular.GetMovieResponseModel
+import com.fakhry.movie.data.source.remote.response.tvshow.details.TvShowDetailsResponse
 import com.fakhry.movie.data.source.remote.response.tvshow.popular.GetTvShowResponseModel
+import com.fakhry.movie.data.source.remote.response.tvshow.popular.TvShowResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -33,8 +35,8 @@ interface ApiService {
 
     @GET("tv/{id}?")
     fun getTvShowDetails(
-        @Path("id")
+        @Path("id") id: Int,
         @Query("api_key") apiKey: String,
-    ): Call<GetTvShowResponseModel>
+    ): Call<TvShowDetailsResponse>
 
 }

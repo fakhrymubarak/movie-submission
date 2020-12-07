@@ -21,5 +21,5 @@ class DetailsViewModel(private val repository: Repository) : ViewModel() {
 
     fun getMovieDetails() : LiveData<MovieDetailsResponse> = repository.getMovieDetails(movieId)
 
-//    fun getTvShowDetails() : LiveData<TvShowDetailsResponse> = repository.getTvShowDetails(tvShowId)
+    fun getTvShowDetails() : LiveData<TvShowDetailsResponse> = repository.getTvShowDetails(tvShowId)
 }

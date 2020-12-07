@@ -3,10 +3,10 @@ package com.fakhry.movie.data.source.remote
 import android.util.Log
 import com.fakhry.movie.BuildConfig
 import com.fakhry.movie.data.source.remote.response.ApiConfig
-import com.fakhry.movie.data.source.remote.response.MovieAndTvShowResponse
 import com.fakhry.movie.data.source.remote.response.movie.details.MovieDetailsResponse
 import com.fakhry.movie.data.source.remote.response.movie.popular.GetMovieResponseModel
 import com.fakhry.movie.data.source.remote.response.movie.popular.MovieResponse
+import com.fakhry.movie.data.source.remote.response.tvshow.details.TvShowDetailsResponse
 import com.fakhry.movie.data.source.remote.response.tvshow.popular.GetTvShowResponseModel
 import com.fakhry.movie.data.source.remote.response.tvshow.popular.TvShowResponse
 import retrofit2.Call
@@ -69,7 +69,6 @@ class RemoteRepository {
 
 
     fun getMovieDetails(callback: LoadMovieDetailsCallback, movieId: Int) {
-        Log.d("asfas", "2 movie id = $movieId")
         service.getMovieDetails(movieId, API_KEY).enqueue(object : Callback<MovieDetailsResponse> {
             override fun onResponse(
                 call: Call<MovieDetailsResponse>,
@@ -87,23 +86,24 @@ class RemoteRepository {
         })
     }
 
-//    fun getAllTvShows(callback: LoadAllTvShowsCallback) {
-//        handler.postDelayed({ callback.onAllTvShowReceived(jsonHelper.loadPopularTvShows()) },
-//            SERVICE_LATENCY_IN_MILLIS)
-//    }
-//
-//    fun getMovieDetails(movieId: Int, callback: LoadMovieDetailsCallback) {
-//        handler.postDelayed({
-//            callback.onMovieDetailsReceived(jsonHelper.loadPopularMovieDetails(movieId))
-//        }, SERVICE_LATENCY_IN_MILLIS)
-//    }
-//
-//    fun getTvShowDetails(tvShowId: Int, callback: LoadTvShowDetailsCallback) {
-//        handler.postDelayed({
-//            callback.onTvShowDetailReceived(jsonHelper.loadPopularTvShowDetails(tvShowId))
-//        }, SERVICE_LATENCY_IN_MILLIS)
-//    }
+    fun getTvShowDetails(callback: LoadTvShowDetailsCallback, tvShowId: Int) {
+        service.getTvShowDetails(tvShowId, API_KEY)
+            .enqueue(object : Callback<TvShowDetailsResponse> {
+                override fun onResponse(
+                    call: Call<TvShowDetailsResponse>,
+                    response: Response<TvShowDetailsResponse>,
+                ) {
+                    if (response.isSuccessful) {
+                        val responseBody = response.body()
+                        responseBody?.let { callback.onTvShowDetailReceived(it) }
+                    }
+                }
 
+                override fun onFailure(call: Call<TvShowDetailsResponse>, t: Throwable) {
+                    Log.e(TAG, t.message.toString())
+                }
+            })
+    }
 
     interface LoadAllMoviesCallback {
         fun onAllMoviesReceived(movieResponses: List<MovieResponse>)
@@ -118,6 +118,6 @@ class RemoteRepository {
     }
 
     interface LoadTvShowDetailsCallback {
-        fun onTvShowDetailReceived(tVShowDetailResponse: MovieAndTvShowResponse)
+        fun onTvShowDetailReceived(tVShowDetailResponse: TvShowDetailsResponse)
     }
 }
