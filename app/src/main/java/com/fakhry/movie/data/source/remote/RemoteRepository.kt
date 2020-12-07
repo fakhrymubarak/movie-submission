@@ -4,6 +4,7 @@ import android.util.Log
 import com.fakhry.movie.BuildConfig
 import com.fakhry.movie.data.source.remote.response.ApiConfig
 import com.fakhry.movie.data.source.remote.response.MovieAndTvShowResponse
+import com.fakhry.movie.data.source.remote.response.movie.details.MovieDetailsResponse
 import com.fakhry.movie.data.source.remote.response.movie.popular.GetMovieResponseModel
 import com.fakhry.movie.data.source.remote.response.movie.popular.MovieResponse
 import com.fakhry.movie.data.source.remote.response.tvshow.popular.GetTvShowResponseModel
@@ -47,7 +48,7 @@ class RemoteRepository {
         })
     }
 
-    fun getPopularTvShows(callback: LoadAllTvShowsCallback){
+    fun getPopularTvShows(callback: LoadAllTvShowsCallback) {
         service.getPopularTvShows(API_KEY).enqueue(object : Callback<GetTvShowResponseModel> {
             override fun onResponse(
                 call: Call<GetTvShowResponseModel>,
@@ -61,6 +62,26 @@ class RemoteRepository {
             }
 
             override fun onFailure(call: Call<GetTvShowResponseModel>, t: Throwable) {
+                Log.e(TAG, t.message.toString())
+            }
+        })
+    }
+
+
+    fun getMovieDetails(callback: LoadMovieDetailsCallback, movieId: Int) {
+        Log.d("asfas", "2 movie id = $movieId")
+        service.getMovieDetails(movieId, API_KEY).enqueue(object : Callback<MovieDetailsResponse> {
+            override fun onResponse(
+                call: Call<MovieDetailsResponse>,
+                response: Response<MovieDetailsResponse>,
+            ) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    responseBody?.let { callback.onMovieDetailsReceived(it) }
+                }
+            }
+
+            override fun onFailure(call: Call<MovieDetailsResponse>, t: Throwable) {
                 Log.e(TAG, t.message.toString())
             }
         })
@@ -93,7 +114,7 @@ class RemoteRepository {
     }
 
     interface LoadMovieDetailsCallback {
-        fun onMovieDetailsReceived(movieDetailResponse: MovieAndTvShowResponse)
+        fun onMovieDetailsReceived(movieDetailsResponse: MovieDetailsResponse)
     }
 
     interface LoadTvShowDetailsCallback {

@@ -1,6 +1,7 @@
 package com.fakhry.movie.ui.details
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -8,7 +9,7 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.fakhry.movie.R
-import com.fakhry.movie.data.source.local.entity.MovieAndTvShowEntity
+import com.fakhry.movie.data.source.remote.response.movie.details.MovieDetailsResponse
 import com.fakhry.movie.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_details.*
 
@@ -37,7 +38,7 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setViewModel() {
         val factory = ViewModelFactory.getInstance()
-        val viewModel = ViewModelProvider(
+        val detailsViewModel = ViewModelProvider(
             this, factory
         )[DetailsViewModel::class.java]
 
@@ -48,12 +49,13 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
             val idTvShows = extras.getInt(EXTRA_TV)
 
             when {
-//                extras.containsKey(EXTRA_MOVIE) -> {
-//                    viewModel.setMovieSelected(idMovie)
-//                    viewModel.getMovieDetails().observe(this, { movieDetails ->
-//                        populateItem(movieDetails)
-//                    })
-//                }
+                extras.containsKey(EXTRA_MOVIE) -> {
+                    Log.d("asfas", "0 movie id = $idMovie")
+                    detailsViewModel.setMovieSelected(idMovie)
+                    detailsViewModel.getMovieDetails().observe(this, { movieDetails ->
+                        populateMovieItem(movieDetails)
+                    })
+                }
 
                 extras.containsKey(EXTRA_TV) -> {
 //                    viewModel.setTvShowSelected(idTvShows)
@@ -66,24 +68,24 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun populateItem(item: MovieAndTvShowEntity) {
+    private fun populateMovieItem(item: MovieDetailsResponse) {
         val circularProgressDrawable = CircularProgressDrawable(this)
         circularProgressDrawable.strokeWidth = 5f
         circularProgressDrawable.centerRadius = 30f
         Glide.with(this)
-            .load(item.poster_url)
+            .load("https://image.tmdb.org/t/p/w600_and_h900_bestv2" + item.posterPath)
             .apply(RequestOptions.placeholderOf(circularProgressDrawable))
             .error(R.drawable.ic_broken_image_24dp)
             .into(iv_poster)
         Glide.with(this)
-            .load(item.backdrop_url)
+            .load("https://image.tmdb.org/t/p/w500_and_h282_face" + item.backdropPath)
             .apply(RequestOptions.placeholderOf(circularProgressDrawable))
             .error(R.drawable.ic_broken_image_24dp)
             .into(iv_backdrop)
         tv_title_details.text = item.title
-        tv_synopsis_details.text = item.synopsis
-        tv_rating_details.text = item.rating.toString()
-        rb_rating.rating = item.rating.toFloat() / 2
+        tv_synopsis_details.text = item.overview
+        tv_rating_details.text = item.voteAverage.toString()
+        rb_rating.rating = item.voteAverage.toFloat() / 2
         showLoading(false)
     }
 

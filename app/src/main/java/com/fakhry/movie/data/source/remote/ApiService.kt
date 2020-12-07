@@ -2,7 +2,7 @@ package com.fakhry.movie.data.source.remote
 
 
 import com.fakhry.movie.BuildConfig
-import com.fakhry.movie.data.source.remote.response.movie.details.GetMovieDetailsResponseModel
+import com.fakhry.movie.data.source.remote.response.movie.details.MovieDetailsResponse
 import com.fakhry.movie.data.source.remote.response.movie.popular.GetMovieResponseModel
 import com.fakhry.movie.data.source.remote.response.tvshow.popular.GetTvShowResponseModel
 import retrofit2.Call
@@ -22,9 +22,9 @@ interface ApiService {
 
     @GET("movie/{id}?")
     fun getMovieDetails(
-        @Path("id")
+        @Path("id") id: Int,
         @Query("api_key") apiKey: String,
-    ): Call<GetMovieDetailsResponseModel>
+    ): Call<MovieDetailsResponse>
 
     @GET("tv/popular?")
     fun getPopularTvShows(

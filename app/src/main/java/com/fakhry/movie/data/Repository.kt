@@ -1,16 +1,16 @@
 package com.fakhry.movie.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.fakhry.movie.data.source.remote.RemoteRepository
+import com.fakhry.movie.data.source.remote.response.movie.details.MovieDetailsResponse
 import com.fakhry.movie.data.source.remote.response.movie.popular.MovieResponse
 import com.fakhry.movie.data.source.remote.response.tvshow.popular.TvShowResponse
 
 class Repository(private val remoteRepository: RemoteRepository) :
     DataSource {
     companion object {
-        val TAG = Repository::class.simpleName
-
         @Volatile
         private var instance: Repository? = null
         fun getInstance(remoteRepository: RemoteRepository): Repository =
@@ -39,28 +39,21 @@ class Repository(private val remoteRepository: RemoteRepository) :
         return listPopularTvShow
     }
 
-//    override fun getAllTvShows(): LiveData<List<MovieAndTvShowEntity>> {
-//        val tvShowsResult = MutableLiveData<List<MovieAndTvShowEntity>>()
-//        remoteDataSource.getAllTvShows(object : RemoteDataSource.LoadAllTvShowsCallback {
-//            override fun onAllTvShowReceived(tvShowResponses: List<MovieAndTvShowResponse>) {
-//                val tvShowList = ArrayList<MovieAndTvShowEntity>()
-//                for (response in tvShowResponses) {
-//                    val show = MovieAndTvShowEntity(
-//                        response.id,
-//                        response.title,
-//                        response.synopsis,
-//                        response.poster_url,
-//                        response.backdrop_url,
-//                        response.rating
-//                    )
-//                    tvShowList.add(show)
-//                }
-//                tvShowsResult.postValue(tvShowList)
-//            }
-//        })
-//        return tvShowsResult
-//    }
+    override fun getMovieDetails(movieId: Int): LiveData<MovieDetailsResponse> {
+        Log.d("asfas", "1 movie id = $movieId")
+        val movieDetails = MutableLiveData<MovieDetailsResponse>()
+        remoteRepository.getMovieDetails(object : RemoteRepository.LoadMovieDetailsCallback {
+            override fun onMovieDetailsReceived(movieDetailsResponse: MovieDetailsResponse) {
+                movieDetails.postValue(movieDetailsResponse)
+            }
+        }, movieId)
+        return movieDetails
+    }
 //
+//    fun getTvShowDetails(tvShowId: Int): LiveData<TvShowDetailsResponse> {
+//        TODO("Not yet implemented")
+//    }
+
 //    override fun getMovieDetails(movieId: Int): LiveData<MovieAndTvShowEntity> {
 //        val moviesResult = MutableLiveData<MovieAndTvShowEntity>()
 //        remoteDataSource.getMovieDetails(movieId,

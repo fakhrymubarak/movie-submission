@@ -2,7 +2,7 @@ package com.fakhry.movie.data.source.remote.response.tvshow.details
 
 import com.google.gson.annotations.SerializedName
 
-data class GetTvShowDetailsResponseModel(
+data class TvShowDetailsResponse(
 
 	@field:SerializedName("original_language")
 	val originalLanguage: String,
