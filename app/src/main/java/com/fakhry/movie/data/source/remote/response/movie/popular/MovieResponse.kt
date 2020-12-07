@@ -1,4 +1,4 @@
-package com.fakhry.movie.data.source.remote.response.movie
+package com.fakhry.movie.data.source.remote.response.movie.popular
 
 import com.google.gson.annotations.SerializedName
 

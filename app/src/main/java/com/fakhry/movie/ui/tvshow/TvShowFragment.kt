@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fakhry.movie.R
 import com.fakhry.movie.data.source.local.entity.MovieAndTvShowEntity
+import com.fakhry.movie.data.source.remote.response.tvshow.popular.TvShowResponse
 import com.fakhry.movie.ui.details.DetailsActivity
 import com.fakhry.movie.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_tv_show.*
@@ -31,17 +32,17 @@ class TvShowFragment : Fragment() {
 
         if (activity != null) {
             val factory = ViewModelFactory.getInstance()
-            val viewModel = ViewModelProvider(
+            val tvShowViewModel = ViewModelProvider(
                 this, factory
             )[TvShowViewModel::class.java]
-//            viewModel.getTvShow().observe(this, { tvShows ->
-//                showRecyclerView(tvShows)
-//            })
+            tvShowViewModel.getPopularTvShows().observe(this, { tvShows ->
+                showRecyclerView(tvShows)
+            })
 
         }
     }
 
-    private fun showRecyclerView(tvShows: List<MovieAndTvShowEntity>) {
+    private fun showRecyclerView(tvShows: List<TvShowResponse>) {
         rv_tv_show.setHasFixedSize(true)
         val tvShowAdapter = TvShowAdapter()
         tvShowAdapter.setTvShows(tvShows)
@@ -51,7 +52,7 @@ class TvShowFragment : Fragment() {
         rv_tv_show.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
         rv_tv_show.adapter = tvShowAdapter
         tvShowAdapter.setOnItemClickCallback(object : TvShowAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: MovieAndTvShowEntity) {
+            override fun onItemClicked(data: TvShowResponse ) {
                 showSelectedUser(data.id)
             }
         })

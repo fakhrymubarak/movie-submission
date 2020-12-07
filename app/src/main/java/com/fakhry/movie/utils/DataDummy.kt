@@ -2,7 +2,7 @@ package com.fakhry.movie.utils
 
 import com.fakhry.movie.data.source.local.entity.MovieAndTvShowEntity
 import com.fakhry.movie.data.source.remote.response.MovieAndTvShowResponse
-import com.fakhry.movie.data.source.remote.response.movie.MovieResponse
+import com.fakhry.movie.data.source.remote.response.movie.popular.MovieResponse
 import java.util.*
 
 object DataDummy {

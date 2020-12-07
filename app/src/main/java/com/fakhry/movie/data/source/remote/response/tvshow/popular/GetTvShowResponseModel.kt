@@ -1,8 +1,8 @@
-package com.fakhry.movie.data.source.remote.response.movie
+package com.fakhry.movie.data.source.remote.response.tvshow.popular
 
 import com.google.gson.annotations.SerializedName
 
-data class GetMovieResponseModel(
+data class GetTvShowResponseModel(
 
     @field:SerializedName("page")
 	val page: Int,
@@ -11,7 +11,7 @@ data class GetMovieResponseModel(
 	val totalPages: Int,
 
     @field:SerializedName("results")
-	val results: List<MovieResponse>,
+	val results: List<TvShowResponse>,
 
     @field:SerializedName("total_results")
 	val totalResults: Int

@@ -10,7 +10,7 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.fakhry.movie.R
-import com.fakhry.movie.data.source.remote.response.movie.MovieResponse
+import com.fakhry.movie.data.source.remote.response.movie.popular.MovieResponse
 import kotlinx.android.synthetic.main.item_rows.view.*
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ListViewHolder>() {
@@ -39,7 +39,7 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ListViewHolder>() {
         circularProgressDrawable.centerRadius = 30f
         val movie = listMovie[position]
         Glide.with(holder.itemView.context)
-            .load("https://image.tmdb.org/t/p/w600_and_h900_bestv2"+movie.posterPath)
+            .load("https://image.tmdb.org/t/p/w600_and_h900_bestv2" + movie.posterPath)
             .apply(RequestOptions.placeholderOf(circularProgressDrawable))
             .error(R.drawable.ic_broken_image_24dp)
             .into(holder.ivAvatar)

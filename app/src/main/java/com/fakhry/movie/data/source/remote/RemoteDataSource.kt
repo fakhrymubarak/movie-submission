@@ -6,8 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import com.fakhry.movie.BuildConfig
 import com.fakhry.movie.data.source.remote.response.ApiConfig
 import com.fakhry.movie.data.source.remote.response.MovieAndTvShowResponse
-import com.fakhry.movie.data.source.remote.response.movie.GetMovieResponseModel
-import com.fakhry.movie.data.source.remote.response.movie.MovieResponse
+import com.fakhry.movie.data.source.remote.response.movie.popular.GetMovieResponseModel
+import com.fakhry.movie.data.source.remote.response.movie.popular.MovieResponse
+import com.fakhry.movie.data.source.remote.response.tvshow.popular.GetTvShowResponseModel
+import com.fakhry.movie.data.source.remote.response.tvshow.popular.TvShowResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -56,6 +58,27 @@ class RemoteDataSource {
             }
         })
         return listPopularMovies
+    }
+
+    fun getPopularTvShows(): LiveData<List<TvShowResponse>> {
+        val listPopularTvShow = MutableLiveData<List<TvShowResponse>>()
+        service.getPopularTvShows(API_KEY).enqueue(object : Callback<GetTvShowResponseModel> {
+            override fun onResponse(
+                call: Call<GetTvShowResponseModel>,
+                response: Response<GetTvShowResponseModel>,
+            ) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    val data = responseBody?.results
+                    listPopularTvShow.postValue(data)
+                }
+            }
+
+            override fun onFailure(call: Call<GetTvShowResponseModel>, t: Throwable) {
+                Log.e(TAG, t.message.toString())
+            }
+        })
+        return listPopularTvShow
     }
 
 //    fun getAllTvShows(callback: LoadAllTvShowsCallback) {

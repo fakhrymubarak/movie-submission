@@ -9,19 +9,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.fakhry.movie.R
-import com.fakhry.movie.data.source.local.entity.MovieAndTvShowEntity
+import com.fakhry.movie.data.source.remote.response.tvshow.popular.TvShowResponse
 import kotlinx.android.synthetic.main.item_rows.view.*
 
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.ListViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
-    private val listTvShow = ArrayList<MovieAndTvShowEntity>()
+    private val listTvShow = ArrayList<TvShowResponse>()
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: MovieAndTvShowEntity)
+        fun onItemClicked(data: TvShowResponse)
     }
 
-    fun setTvShows(items: List<MovieAndTvShowEntity>) {
+    fun setTvShows(items: List<TvShowResponse>) {
         listTvShow.clear()
         listTvShow.addAll(items)
         notifyDataSetChanged()
@@ -36,13 +36,13 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.ListViewHolder>() {
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val tvShow = listTvShow[position]
         Glide.with(holder.itemView.context)
-            .load(tvShow.poster_url)
+            .load("https://image.tmdb.org/t/p/w600_and_h900_bestv2" + tvShow.posterPath)
             .apply(RequestOptions.placeholderOf(R.drawable.ic_refresh_24dp))
             .error(R.drawable.ic_broken_image_24dp)
             .into(holder.ivAvatar)
-        holder.tvTitle.text = tvShow.title
-        holder.tvSynopsis.text = tvShow.synopsis
-        holder.tvRating.text = tvShow.rating.toString()
+        holder.tvTitle.text = tvShow.name
+        holder.tvSynopsis.text = tvShow.overview
+        holder.tvRating.text = tvShow.voteAverage.toString()
         holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listTvShow[position]) }
     }
 

@@ -2,7 +2,8 @@ package com.fakhry.movie.data
 
 import androidx.lifecycle.LiveData
 import com.fakhry.movie.data.source.remote.RemoteDataSource
-import com.fakhry.movie.data.source.remote.response.movie.MovieResponse
+import com.fakhry.movie.data.source.remote.response.movie.popular.MovieResponse
+import com.fakhry.movie.data.source.remote.response.tvshow.popular.TvShowResponse
 
 class Repository private constructor(private val remoteDataSource: RemoteDataSource) :
     DataSource {
@@ -17,6 +18,9 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
 
     override fun getPopularMovies(): LiveData<List<MovieResponse>> =
         remoteDataSource.getPopularMovies()
+
+    override fun getPopularTvShows(): LiveData<List<TvShowResponse>> =
+        remoteDataSource.getPopularTvShows()
 
 
 //    override fun getAllTvShows(): LiveData<List<MovieAndTvShowEntity>> {
