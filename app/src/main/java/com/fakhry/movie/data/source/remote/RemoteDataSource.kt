@@ -1,4 +1,4 @@
-package com.fakhry.movie.data
+            package com.fakhry.movie.data.source.remote
 
 import androidx.lifecycle.LiveData
 import com.fakhry.movie.data.source.remote.response.movie.details.MovieDetailsResponse
@@ -6,7 +6,7 @@ import com.fakhry.movie.data.source.remote.response.movie.popular.MovieResponse
 import com.fakhry.movie.data.source.remote.response.tvshow.details.TvShowDetailsResponse
 import com.fakhry.movie.data.source.remote.response.tvshow.popular.TvShowResponse
 
-interface DataSource {
+interface RemoteDataSource {
 
     fun getPopularMovies() : LiveData<List<MovieResponse>>
     fun getPopularTvShows() : LiveData<List<TvShowResponse>>

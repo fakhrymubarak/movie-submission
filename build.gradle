@@ -39,6 +39,9 @@ buildscript {
 
         //API respond checker
         loggingInterceptorVersion = '4.9.0'
+
+        //Database
+        roomVersion = '2.2.5'
     }
     repositories {
         google()

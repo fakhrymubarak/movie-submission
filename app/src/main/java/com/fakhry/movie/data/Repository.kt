@@ -2,6 +2,7 @@ package com.fakhry.movie.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.fakhry.movie.data.source.remote.RemoteDataSource
 import com.fakhry.movie.data.source.remote.RemoteRepository
 import com.fakhry.movie.data.source.remote.response.movie.details.MovieDetailsResponse
 import com.fakhry.movie.data.source.remote.response.movie.popular.MovieResponse
@@ -9,7 +10,7 @@ import com.fakhry.movie.data.source.remote.response.tvshow.details.TvShowDetails
 import com.fakhry.movie.data.source.remote.response.tvshow.popular.TvShowResponse
 
 class Repository(private val remoteRepository: RemoteRepository) :
-    DataSource {
+    RemoteDataSource {
     companion object {
         @Volatile
         private var instance: Repository? = null

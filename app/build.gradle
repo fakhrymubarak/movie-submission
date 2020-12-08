@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -63,7 +64,6 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:$archLifecycleTestVersion"
     implementation "com.android.support.test.espresso:espresso-idling-resource:$espressoVersion"
 
-
     //architecture component
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleVersion"
 
@@ -73,4 +73,9 @@ dependencies {
 
     //API respond checker
     implementation "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion"
+
+
+    //ROOM database
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
 }

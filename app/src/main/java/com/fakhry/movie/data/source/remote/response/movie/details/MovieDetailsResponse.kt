@@ -21,11 +21,4 @@ data class MovieDetailsResponse(
 
 	@field:SerializedName("vote_average")
 	val voteAverage: Double,
-
-//	@field:SerializedName("genres")
-//	val genres: List<GenresItem>,
-
-
-//	@field:SerializedName("release_date")
-//	val releaseDate: String,
 )
