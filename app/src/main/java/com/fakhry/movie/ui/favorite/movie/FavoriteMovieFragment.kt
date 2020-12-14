@@ -12,15 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.fakhry.movie.R
 import com.fakhry.movie.data.source.local.entity.MovieEntity
 import com.fakhry.movie.ui.details.DetailsActivity
-import com.fakhry.movie.ui.favorite.tvshow.FavTVShowAdapter
-import com.fakhry.movie.ui.favorite.tvshow.FavTvShowViewModel
 import com.fakhry.movie.viewmodel.ViewModelFactory
-import com.fakhry.movie.vo.Status
 import kotlinx.android.synthetic.main.fragment_movie.*
 
-
 class FavoriteMovieFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -36,35 +31,24 @@ class FavoriteMovieFragment : Fragment() {
             val factory = ViewModelFactory.getInstance(requireActivity())
             val moviesViewModel = ViewModelProvider(
                 this, factory
-            )[FavTvShowViewModel::class.java]
-//            EspressoIdlingResource.increment()
-            moviesViewModel.getPopularMovies().observe(this, { movies ->
+            )[FavMovieViewModel::class.java]
+            moviesViewModel.getFavMovies().observe(this, { movies ->
                 if (movies != null) {
-                    when (movies.status) {
-                        Status.LOADING -> showLoading(true)
-                        Status.SUCCESS -> {
-                            showLoading(false)
-                            if (movies.data != null) {
-                                showRecyclerView(movies.data)
-                            }
-                        }
-                        Status.ERROR -> showLoading(true)
-                    }
+                    showRecyclerView(movies)
                 }
-//                EspressoIdlingResource.decrement()
             })
         }
     }
 
     private fun showRecyclerView(movies: List<MovieEntity>) {
         rv_movie.setHasFixedSize(true)
-        val movieAdapter = FavTVShowAdapter()
+        val movieAdapter = FavMovieAdapter()
         movieAdapter.setMovies(movies)
         movieAdapter.notifyDataSetChanged()
         rv_movie.layoutManager = LinearLayoutManager(context)
         rv_movie.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
         rv_movie.adapter = movieAdapter
-        movieAdapter.setOnItemClickCallback(object : FavTVShowAdapter.OnItemClickCallback {
+        movieAdapter.setOnItemClickCallback(object : FavMovieAdapter.OnItemClickCallback {
             override fun onItemClicked(data: MovieEntity) {
                 showSelectedUser(data.movieId)
 

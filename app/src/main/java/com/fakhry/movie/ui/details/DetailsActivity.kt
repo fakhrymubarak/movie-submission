@@ -2,6 +2,7 @@ package com.fakhry.movie.ui.details
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -12,7 +13,9 @@ import com.fakhry.movie.data.source.local.entity.MovieEntity
 import com.fakhry.movie.data.source.local.entity.TvShowEntity
 import com.fakhry.movie.utils.EspressoIdlingResource
 import com.fakhry.movie.viewmodel.ViewModelFactory
+import com.fakhry.movie.vo.Status
 import kotlinx.android.synthetic.main.activity_details.*
+import kotlin.properties.Delegates
 
 class DetailsActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
@@ -20,13 +23,18 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
         const val EXTRA_TV = "extra_tv"
     }
 
+    private var isMovieDetails by Delegates.notNull<Boolean>()
+    private lateinit var detailsViewModel: DetailsViewModel
+    private lateinit var mMovieEntity: MovieEntity
+    private lateinit var mTvShowEntity: TvShowEntity
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
         showLoading(true)
         setViewModel()
-
         btn_back.setOnClickListener(this)
+        fab_favorite.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -34,12 +42,38 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
             btn_back -> {
                 onBackPressed()
             }
+            fab_favorite -> {
+                if (isMovieDetails) {
+                    if (mMovieEntity.isFavMovie) {
+                        Toast.makeText(this, "Berhasil menghapus dari favorite", Toast.LENGTH_LONG)
+                            .show()
+                    } else {
+                        Toast.makeText(this, "Berhasil menambahkan ke favorite", Toast.LENGTH_LONG)
+                            .show()
+                    }
+                    detailsViewModel.setFavMovie(mMovieEntity)
+                } else {
+                    if (mTvShowEntity.isFavTvShow) {
+                        Toast.makeText(this, "Berhasil menghapus dari favorite", Toast.LENGTH_LONG)
+                            .show()
+                    } else {
+                        Toast.makeText(this, "Berhasil menambahkan ke favorite", Toast.LENGTH_LONG)
+                            .show()
+                    }
+                    detailsViewModel.setFavTvShow(mTvShowEntity)
+                }
+            }
         }
+    }
+
+    private fun setFavState(state: Boolean) {
+        if (state) fab_favorite.setImageResource(R.drawable.ic_favorite_24dp)
+        else fab_favorite.setImageResource(R.drawable.ic_favorite_border_24dp)
     }
 
     private fun setViewModel() {
         val factory = ViewModelFactory.getInstance(this)
-        val detailsViewModel = ViewModelProvider(
+        detailsViewModel = ViewModelProvider(
             this, factory
         )[DetailsViewModel::class.java]
 
@@ -52,27 +86,52 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
             when {
                 extras.containsKey(EXTRA_MOVIE) -> {
                     EspressoIdlingResource.increment()
+                    isMovieDetails = true
                     detailsViewModel.setMovieSelected(idMovie)
                     detailsViewModel.getMovieDetails().observe(this, { movieDetails ->
                         if (movieDetails != null) {
-                            if (movieDetails.data != null) {
-                                populateItem(movieDetails.data)
+                            when (movieDetails.status) {
+                                Status.LOADING -> showLoading(true)
+                                Status.SUCCESS -> {
+                                    showLoading(false)
+                                    if (movieDetails.data != null) {
+                                        populateItem(movieDetails.data)
+                                        EspressoIdlingResource.decrement()
+                                    }
+                                }
+                                Status.ERROR -> {
+                                    showLoading(false)
+                                    Toast.makeText(this, "Terjadi kesalahan", Toast.LENGTH_SHORT)
+                                        .show()
+                                }
                             }
                         }
-                        EspressoIdlingResource.decrement()
                     })
                 }
 
                 extras.containsKey(EXTRA_TV) -> {
                     EspressoIdlingResource.increment()
+                    isMovieDetails = false
                     detailsViewModel.setTvShowSelected(idTvShows)
                     detailsViewModel.getTvShowDetails().observe(this, { tvShowDetails ->
                         if (tvShowDetails != null) {
-                            if (tvShowDetails.data != null) {
-                                populateItem(tvShowDetails.data)
+                            when (tvShowDetails.status) {
+                                Status.LOADING -> showLoading(true)
+                                Status.SUCCESS -> {
+                                    showLoading(false)
+                                    if (tvShowDetails.data != null) {
+                                        populateItem(tvShowDetails.data)
+                                        EspressoIdlingResource.decrement()
+                                    }
+                                }
+                                Status.ERROR -> {
+                                    showLoading(false)
+                                    Toast.makeText(this, "Terjadi kesalahan", Toast.LENGTH_SHORT)
+                                        .show()
+                                }
                             }
+
                         }
-                        EspressoIdlingResource.decrement()
                     })
                 }
             }
@@ -80,6 +139,8 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun populateItem(item: MovieEntity) {
+        mMovieEntity = item
+        setFavState(item.isFavMovie)
         val circularProgressDrawable = CircularProgressDrawable(this)
         circularProgressDrawable.strokeWidth = 5f
         circularProgressDrawable.centerRadius = 30f
@@ -101,6 +162,8 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun populateItem(item: TvShowEntity) {
+        mTvShowEntity = item
+        setFavState(item.isFavTvShow)
         val circularProgressDrawable = CircularProgressDrawable(this)
         circularProgressDrawable.strokeWidth = 5f
         circularProgressDrawable.centerRadius = 30f

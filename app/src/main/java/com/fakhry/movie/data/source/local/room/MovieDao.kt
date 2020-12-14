@@ -11,13 +11,11 @@ interface MovieDao {
     @Query("SELECT * FROM movie_entities")
     fun getMovies(): LiveData<List<MovieEntity>>
 
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMovies(movies: List<MovieEntity>)
-
     @Query("SELECT * FROM tv_show_entity")
     fun getTvShows(): LiveData<List<TvShowEntity>>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertMovies(movies: List<MovieEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTvShows(tvShows: List<TvShowEntity>)
@@ -29,8 +27,14 @@ interface MovieDao {
     fun updateTvShows(tvShows: TvShowEntity)
 
     @Query("SELECT * FROM movie_entities WHERE id_movie = :movieId")
-    fun getMovieDetailsById(movieId: Int) : LiveData<MovieEntity>
+    fun getMovieDetailsById(movieId: Int): LiveData<MovieEntity>
 
     @Query("SELECT * FROM tv_show_entity WHERE id_tv_show = :tvShowId")
-    fun getTvShowDetailsById(tvShowId: Int) : LiveData<TvShowEntity>
+    fun getTvShowDetailsById(tvShowId: Int): LiveData<TvShowEntity>
+
+    @Query("SELECT * FROM movie_entities WHERE is_fav_movie = 1")
+    fun getFavoriteMovies(): LiveData<List<MovieEntity>>
+
+    @Query("SELECT * FROM tv_show_entity WHERE is_fav_tv_show = 1")
+    fun getFavoriteTvShows(): LiveData<List<TvShowEntity>>
 }

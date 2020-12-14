@@ -188,10 +188,22 @@ class Repository private constructor(
     }
 
     override fun setFavMovie(movie: MovieEntity, state: Boolean) {
-        return localDataSource.setFavMovie(movie, state)
+        appExecutors.diskIO().execute {
+            localDataSource.setFavMovie(movie, state)
+        }
     }
 
     override fun setFavTvShow(tvShow: TvShowEntity, state: Boolean) {
-        return localDataSource.setFavTvShow(tvShow, state)
+        appExecutors.diskIO().execute {
+            localDataSource.setFavTvShow(tvShow, state)
+        }
+    }
+
+    override fun getFavMovies(): LiveData<List<MovieEntity>> {
+        return localDataSource.getFavMovies()
+    }
+
+    override fun getFavTvShows(): LiveData<List<TvShowEntity>> {
+        return localDataSource.getFavTvShows()
     }
 }

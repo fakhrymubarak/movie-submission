@@ -10,18 +10,18 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.fakhry.movie.R
-import com.fakhry.movie.data.source.remote.response.movie.popular.MovieResponse
+import com.fakhry.movie.data.source.local.entity.MovieEntity
 import kotlinx.android.synthetic.main.item_rows.view.*
 
 class FavMovieAdapter : RecyclerView.Adapter<FavMovieAdapter.ListViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
-    private val listMovie = ArrayList<MovieResponse>()
+    private val listMovie = ArrayList<MovieEntity>()
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: MovieResponse)
+        fun onItemClicked(data: MovieEntity)
     }
 
-    fun setMovies(items: List<MovieResponse>) {
+    fun setMovies(items: List<MovieEntity>) {
         listMovie.clear()
         listMovie.addAll(items)
         notifyDataSetChanged()

@@ -10,18 +10,18 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.fakhry.movie.R
-import com.fakhry.movie.data.source.local.entity.MovieEntity
+import com.fakhry.movie.data.source.local.entity.TvShowEntity
 import kotlinx.android.synthetic.main.item_rows.view.*
 
 class FavTVShowAdapter : RecyclerView.Adapter<FavTVShowAdapter.ListViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
-    private val listMovie = ArrayList<MovieEntity>()
+    private val listMovie = ArrayList<TvShowEntity>()
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: MovieEntity)
+        fun onItemClicked(data: TvShowEntity)
     }
 
-    fun setMovies(items: List<MovieEntity>) {
+    fun setMovies(items: List<TvShowEntity>) {
         listMovie.clear()
         listMovie.addAll(items)
         notifyDataSetChanged()
@@ -43,7 +43,7 @@ class FavTVShowAdapter : RecyclerView.Adapter<FavTVShowAdapter.ListViewHolder>()
             .apply(RequestOptions.placeholderOf(circularProgressDrawable))
             .error(R.drawable.ic_broken_image_24dp)
             .into(holder.ivAvatar)
-        holder.tvTitle.text = movie.title
+        holder.tvTitle.text = movie.name
         holder.tvSynopsis.text = movie.overview
         holder.tvRating.text = movie.voteAverage.toString()
         holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listMovie[position]) }
