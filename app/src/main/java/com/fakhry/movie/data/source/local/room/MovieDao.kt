@@ -2,29 +2,35 @@ package com.fakhry.movie.data.source.local.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.fakhry.movie.data.source.local.entity.FavMovieEntity
-import com.fakhry.movie.data.source.local.entity.FavTvShowEntity
+import com.fakhry.movie.data.source.local.entity.MovieEntity
+import com.fakhry.movie.data.source.local.entity.TvShowEntity
 
 @Dao
 interface MovieDao {
 
-    @Query("SELECT * FROM fav_mov_entities")
-    fun getMovies(): LiveData<List<FavMovieEntity>>
+    @Query("SELECT * FROM movie_entities")
+    fun getMovies(): LiveData<List<MovieEntity>>
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMovies(movies: List<FavMovieEntity>)
+    fun insertMovies(movies: List<MovieEntity>)
 
-    @Update
-    fun updateMovies(movies: FavMovieEntity)
-
-    @Query("SELECT * FROM fav_tvshow_entities")
-    fun getTvShows(): LiveData<List<FavTvShowEntity>>
+    @Query("SELECT * FROM tv_show_entity")
+    fun getTvShows(): LiveData<List<TvShowEntity>>
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertTvShows(tvShows: List<FavTvShowEntity>)
+    fun insertTvShows(tvShows: List<TvShowEntity>)
 
     @Update
-    fun updateTvShows(tvShows: FavTvShowEntity)
+    fun updateMovies(movies: MovieEntity)
+
+    @Update
+    fun updateTvShows(tvShows: TvShowEntity)
+
+    @Query("SELECT * FROM movie_entities WHERE id_movie = :movieId")
+    fun getMovieDetailsById(movieId: Int) : LiveData<MovieEntity>
+
+    @Query("SELECT * FROM tv_show_entity WHERE id_tv_show = :tvShowId")
+    fun getTvShowDetailsById(tvShowId: Int) : LiveData<TvShowEntity>
 }

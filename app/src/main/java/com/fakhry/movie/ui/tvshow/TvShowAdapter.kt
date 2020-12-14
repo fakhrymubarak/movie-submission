@@ -9,19 +9,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.fakhry.movie.R
-import com.fakhry.movie.data.source.remote.response.tvshow.popular.TvShowResponse
+import com.fakhry.movie.data.source.local.entity.TvShowEntity
 import kotlinx.android.synthetic.main.item_rows.view.*
 
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.ListViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
-    private val listTvShow = ArrayList<TvShowResponse>()
+    private val listTvShow = ArrayList<TvShowEntity>()
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: TvShowResponse)
+        fun onItemClicked(data: TvShowEntity)
     }
 
-    fun setTvShows(items: List<TvShowResponse>) {
+    fun setTvShows(items: List<TvShowEntity>) {
         listTvShow.clear()
         listTvShow.addAll(items)
         notifyDataSetChanged()

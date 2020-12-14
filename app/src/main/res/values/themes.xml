@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MovieSubmission" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.MovieSubmission.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blueDark</item>
         <item name="colorPrimaryVariant">@color/blueLight</item>

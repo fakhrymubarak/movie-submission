@@ -1,7 +1,7 @@
 package com.fakhry.movie.data
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.fakhry.movie.data.source.remote.RemoteRepository
+import com.fakhry.movie.data.source.remote.RemoteDataSource
 import com.fakhry.movie.utils.DataDummy
 import com.fakhry.movie.utils.LiveDataTestUtil
 import com.nhaarman.mockitokotlin2.any
@@ -16,7 +16,7 @@ class RepositoryTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private val remote = mock(RemoteRepository::class.java)
+    private val remote = mock(RemoteDataSource::class.java)
     private val repository = Repository(remote)
 
     private val movieResponse = DataDummy.generateRemoteDummyMovies()
@@ -31,7 +31,7 @@ class RepositoryTest {
     @Test
     fun getPopularMovies() {
         doAnswer { invocation ->
-            (invocation.arguments[0] as RemoteRepository.LoadAllMoviesCallback).onAllMoviesReceived(
+            (invocation.arguments[0] as RemoteDataSource.LoadAllMoviesCallback).onAllMoviesReceived(
                 movieResponse)
             null
         }.`when`(remote).getPopularMovies(any())
@@ -44,7 +44,7 @@ class RepositoryTest {
     @Test
     fun getPopularTvShows() {
         doAnswer { invocation ->
-            (invocation.arguments[0] as RemoteRepository.LoadAllTvShowsCallback).onAllTvShowReceived(
+            (invocation.arguments[0] as RemoteDataSource.LoadAllTvShowsCallback).onAllTvShowReceived(
                 tvShowResponse)
             null
         }.`when`(remote).getPopularTvShows(any())
@@ -57,7 +57,7 @@ class RepositoryTest {
     @Test
     fun getMovieDetails() {
         doAnswer { invocation ->
-            (invocation.arguments[1] as RemoteRepository.LoadMovieDetailsCallback).onMovieDetailsReceived(
+            (invocation.arguments[1] as RemoteDataSource.LoadMovieDetailsCallback).onMovieDetailsReceived(
                 movieDetails)
             null
         }.`when`(remote).getMovieDetails(eq(movieId), any())
@@ -75,7 +75,7 @@ class RepositoryTest {
     @Test
     fun getTvShowDetails() {
         doAnswer { invocation ->
-            (invocation.arguments[1] as RemoteRepository.LoadTvShowDetailsCallback).onTvShowDetailReceived(
+            (invocation.arguments[1] as RemoteDataSource.LoadTvShowDetailsCallback).onTvShowDetailReceived(
                 tvShowDetails)
             null
         }.`when`(remote).getTvShowDetails(eq(tvShowId), any())

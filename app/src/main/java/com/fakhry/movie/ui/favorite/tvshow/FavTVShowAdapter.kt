@@ -1,4 +1,4 @@
-package com.fakhry.movie.ui.movie
+package com.fakhry.movie.ui.favorite.tvshow
 
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +13,7 @@ import com.fakhry.movie.R
 import com.fakhry.movie.data.source.local.entity.MovieEntity
 import kotlinx.android.synthetic.main.item_rows.view.*
 
-class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ListViewHolder>() {
+class FavTVShowAdapter : RecyclerView.Adapter<FavTVShowAdapter.ListViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
     private val listMovie = ArrayList<MovieEntity>()
 

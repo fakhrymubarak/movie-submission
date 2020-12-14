@@ -3,8 +3,9 @@ package com.fakhry.movie.ui.details
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.fakhry.movie.data.Repository
-import com.fakhry.movie.data.source.remote.response.movie.details.MovieDetailsResponse
-import com.fakhry.movie.data.source.remote.response.tvshow.details.TvShowDetailsResponse
+import com.fakhry.movie.data.source.local.entity.MovieEntity
+import com.fakhry.movie.data.source.local.entity.TvShowEntity
+import com.fakhry.movie.vo.Resource
 import kotlin.properties.Delegates
 
 class DetailsViewModel(private val repository: Repository) : ViewModel() {
@@ -19,7 +20,16 @@ class DetailsViewModel(private val repository: Repository) : ViewModel() {
         this.tvShowId = itemId
     }
 
-    fun getMovieDetails() : LiveData<MovieDetailsResponse> = repository.getMovieDetails(movieId)
+    fun getMovieDetails(): LiveData<Resource<MovieEntity>> = repository.getMovieDetails(movieId)
 
-    fun getTvShowDetails() : LiveData<TvShowDetailsResponse> = repository.getTvShowDetails(tvShowId)
+    fun getTvShowDetails(): LiveData<Resource<TvShowEntity>> = repository.getTvShowDetails(tvShowId)
+
+    fun setFavMovie() {
+//        val movie = getMovieDetails().value
+//        if (movie != null)
+//        val newState = !courseEntity.bookmarked
+//        repository.setFavMovie(courseEntity, newState)
+
+
+    }
 }

@@ -5,25 +5,28 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "fav_tvshow_entities")
-data class FavTvShowEntity(
+@Entity(tableName = "tv_show_entity")
+data class TvShowEntity(
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "movie_id")
-    var movieId : String,
+    @ColumnInfo(name = "id_tv_show")
+    var tvShowId : Int,
 
     @ColumnInfo(name = "name")
     var name : String,
 
     @ColumnInfo(name = "overview")
-    val overview: String,
+    var overview: String,
 
     @ColumnInfo(name = "poster_path")
-    val posterPath: String,
+    var posterPath: String,
 
     @ColumnInfo(name = "backdrop_path")
-    val backdropPath: String,
+    var backdropPath: String,
 
     @ColumnInfo(name = "vote_average")
-    val voteAverage: Double
+    var voteAverage: Double,
+
+    @ColumnInfo(name = "is_fav_tv_show")
+    var isFavTvShow: Boolean
 )

@@ -11,26 +11,37 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_dashboard"
+            android:id="@+id/toolbar_favorite"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimaryVariant"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:layout_scrollFlags="scroll|enterAlways|snap"
-            app:menu="@menu/favorite_menu"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:titleTextColor="@color/white">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/cd_btn_back"
+                android:elevation="3dp"
+                android:src="@drawable/ic_arrow_back_24dp" />
 
             <TextView
                 android:id="@+id/toolbar_title"
                 style="@style/TextContext.ExtraLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/movie_submission" />
+                android:layout_gravity="center"
+                android:text="@string/favorite" />
         </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
+            android:id="@+id/tabs_fav"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/blueLight"

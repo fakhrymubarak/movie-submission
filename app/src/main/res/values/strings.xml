@@ -2,8 +2,11 @@
     <string name="app_name">Movie Submission</string>
 
     <!--  Fragment  -->
-    <string name="tab_text_1">Movies</string>
-    <string name="tab_text_2">TV Shows</string>
+<!--    <string name="tab_text_1">Search</string>-->
+    <string name="tab_text_2">Movies</string>
+    <string name="tab_text_3">TV Shows</string>
+    <string name="tab_text_4">Fav Movies</string>
+    <string name="tab_text_5">Fav Tv Shows</string>
 
     <!--  Details   -->
     <string name="rating">Rating :</string>
@@ -14,4 +17,7 @@
     <string name="cd_movie_backdrop">Movie Backdrop</string>
     <string name="cd_logo">Logo Application</string>
     <string name="cd_btn_back">Button Back</string>
+    <string name="favorite">Favorite</string>
+    <string name="movie_submission">Movie Submission</string>
+    <string name="cd_btn_fav">Favorite Button</string>
 </resources>

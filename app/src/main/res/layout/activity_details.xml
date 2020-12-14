@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:background="@android:color/transparent"
             android:contentDescription="@string/cd_btn_back"
             android:elevation="3dp"
-            android:src="@drawable/ic_baseline_arrow_back_24_white"
+            android:src="@drawable/ic_arrow_back_24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -122,6 +122,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
+            android:lineSpacingMultiplier="1.3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4"
             tools:text="Lorem ipsum is color dolor si amet. Lorem ipsum is color dolor si amet. Lorem ipsum is color dolor si amet. Lorem ipsum is color dolor si amet.Lorem ipsum is color dolor si amet.Lorem ipsum is color dolor si amet " />
@@ -147,4 +148,17 @@
             app:layout_constraintTop_toTopOf="@+id/textView2"
             tools:text="6.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:elevation="8dp"
+        android:focusable="true"
+        android:src="@drawable/ic_favorite_border_24dp"
+        app:fabSize="normal"
+        android:contentDescription="@string/cd_btn_fav" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

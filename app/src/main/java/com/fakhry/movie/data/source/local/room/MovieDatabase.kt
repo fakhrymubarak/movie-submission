@@ -4,13 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.fakhry.movie.data.source.local.entity.FavMovieEntity
-import com.fakhry.movie.data.source.local.entity.FavTvShowEntity
+import com.fakhry.movie.data.source.local.entity.MovieEntity
+import com.fakhry.movie.data.source.local.entity.TvShowEntity
 
 
-@Database(entities = [FavMovieEntity::class, FavTvShowEntity::class], version = 1, exportSchema = false)
+@Database(entities = [MovieEntity::class, TvShowEntity::class], version = 1, exportSchema = false)
 abstract class MovieDatabase : RoomDatabase() {
-    abstract fun dao(): MovieDao
+    abstract fun movieDao(): MovieDao
 
     companion object {
 
