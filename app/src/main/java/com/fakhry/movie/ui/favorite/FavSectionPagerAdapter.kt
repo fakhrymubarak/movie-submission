@@ -12,8 +12,8 @@ class FavSectionsPagerAdapter(private val mContext: Context, fm: FragmentManager
     FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     private val tabTables = intArrayOf(
-        R.string.tab_text_4,
-        R.string.tab_text_5
+        R.string.tab_text_3,
+        R.string.tab_text_4
     )
 
     override fun getItem(position: Int): Fragment =

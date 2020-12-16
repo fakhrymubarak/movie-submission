@@ -38,15 +38,29 @@ class FavMovieFragment : Fragment() {
         showLoading(true)
         itemTouchHelper.attachToRecyclerView(binding?.rvMovie)
         if (activity != null) {
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            favMovieViewModel = ViewModelProvider(this, factory)[FavMovieViewModel::class.java]
-            favMovieViewModel.getFavMovies().observe(this, { movies ->
-                if (movies != null) {
-                    showRecyclerView(movies)
-                    showLoading(false)
-                }
-            })
+            setViewModel()
         }
+    }
+
+    private fun setViewModel() {
+        val factory = ViewModelFactory.getInstance(requireActivity())
+        favMovieViewModel = ViewModelProvider(this, factory)[FavMovieViewModel::class.java]
+        favMovieViewModel.getFavMovies().observe(this, { movies ->
+            if (movies.isNotEmpty()) {
+                tv_no_data_movie.visibility = View.GONE
+                iv_no_data_movie.visibility = View.GONE
+            } else {
+                iv_no_data_movie.visibility = View.VISIBLE
+                tv_no_data_movie.visibility = View.VISIBLE
+            }
+            showRecyclerView(movies)
+            showLoading(false)
+        })
+    }
+
+    override fun onResume() {
+        setViewModel()
+        super.onResume()
     }
 
     private fun showRecyclerView(movies: PagedList<MovieEntity>) {

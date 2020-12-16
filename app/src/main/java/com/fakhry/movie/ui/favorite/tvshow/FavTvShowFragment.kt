@@ -38,13 +38,29 @@ class FavTvShowFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(binding?.rvTvShow)
         showLoading(true)
         if (activity != null) {
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            favTvShowViewModel = ViewModelProvider(this, factory)[FavTvShowViewModel::class.java]
-            favTvShowViewModel.getFavoriteTvShow().observe(this, { tvShows ->
-                showRecyclerView(tvShows)
-                showLoading(false)
-            })
+            setViewModel()
         }
+    }
+
+    private fun setViewModel() {
+        val factory = ViewModelFactory.getInstance(requireActivity())
+        favTvShowViewModel = ViewModelProvider(this, factory)[FavTvShowViewModel::class.java]
+        favTvShowViewModel.getFavoriteTvShow().observe(this, { tvShows ->
+            if (tvShows.isNotEmpty()) {
+                iv_no_data_tv_show.visibility = View.GONE
+                tv_no_data_tv_show.visibility = View.GONE
+            } else {
+                iv_no_data_tv_show.visibility = View.VISIBLE
+                tv_no_data_tv_show.visibility = View.VISIBLE
+            }
+            showRecyclerView(tvShows)
+            showLoading(false)
+        })
+    }
+
+    override fun onResume() {
+        setViewModel()
+        super.onResume()
     }
 
     private fun showRecyclerView(movies: PagedList<TvShowEntity>) {

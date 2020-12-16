@@ -2,10 +2,10 @@
     <string name="app_name">Movie Submission</string>
 
     <!--  Fragment  -->
-    <string name="tab_text_2">Movies</string>
-    <string name="tab_text_3">TV Shows</string>
-    <string name="tab_text_4">Fav Movies</string>
-    <string name="tab_text_5">Fav Tv Shows</string>
+    <string name="tab_text_1">Movies</string>
+    <string name="tab_text_2">TV Shows</string>
+    <string name="tab_text_3">Fav Movies</string>
+    <string name="tab_text_4">Fav Tv Shows</string>
 
     <!--  Details   -->
     <string name="rating">Rating :</string>
@@ -26,4 +26,7 @@
 
     <string name="message_undo">Item berhasil dihapus dari favorite</string>
     <string name="undo">Undo</string>
+    <string name="cd_no_data_favorite">No Favorite Data</string>
+    <string name="empty_fav_movie">Kamu tidak memiliki daftar Favorite Movie</string>
+    <string name="empty_fav_tv_show">Kamu tidak memiliki daftar Favorite Tv Show</string>
 </resources>

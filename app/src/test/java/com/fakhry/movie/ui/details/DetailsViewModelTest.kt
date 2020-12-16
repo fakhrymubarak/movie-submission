@@ -64,7 +64,10 @@ class DetailsViewModelTest {
         assertEquals(dummyMovies.data?.overview, movieEntity?.overview)
         assertEquals(dummyMovies.data?.posterPath, movieEntity?.posterPath)
         assertEquals(dummyMovies.data?.backdropPath, movieEntity?.backdropPath)
-//        assertEquals(dummyMovies.data?.voteAverage, movieEntity?.voteAverage, 0.0)
+        dummyMovies.data?.voteAverage?.let { movieEntity?.voteAverage?.let { it1 ->
+            assertEquals(it,
+                it1, 0.0)
+        } }
 
         detailsViewModel.getMovieDetails().observeForever(movieDetailsObserver)
         verify(movieDetailsObserver).onChanged(dummyMovies)
@@ -85,7 +88,10 @@ class DetailsViewModelTest {
         assertEquals(dummyTvShows.data?.overview, tvShowEntity?.overview)
         assertEquals(dummyTvShows.data?.posterPath, tvShowEntity?.posterPath)
         assertEquals(dummyTvShows.data?.backdropPath, tvShowEntity?.backdropPath)
-//        assertEquals(dummyTvShows.data?.voteAverage, tvShowEntity?.voteAverage, 0.0)
+        dummyTvShows.data?.voteAverage?.let { tvShowEntity?.voteAverage?.let { it1 ->
+            assertEquals(it,
+                it1, 0.0)
+        } }
 
         detailsViewModel.getTvShowDetails().observeForever(tvShowDetailsObserver)
         verify(tvShowDetailsObserver).onChanged(dummyTvShows)

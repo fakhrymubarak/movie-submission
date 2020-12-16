@@ -9,9 +9,6 @@ import com.fakhry.movie.data.source.local.entity.TvShowEntity
 @Dao
 interface MovieDao {
 
-//    @Query("SELECT * FROM movie_entities")
-//    fun getMovies(): LiveData<List<MovieEntity>>
-
     @Query("SELECT * FROM movie_entities")
     fun getMovies(): DataSource.Factory<Int, MovieEntity>
 
