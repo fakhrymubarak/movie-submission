@@ -20,4 +20,6 @@
     <string name="favorite">Favorite</string>
     <string name="movie_submission">Movie Submission</string>
     <string name="cd_btn_fav">Favorite Button</string>
+    <string name="remove_fav">Berhasil menghapus dari favorite</string>
+    <string name="add_fav">Berhasil menambahkan ke favorite</string>
 </resources>

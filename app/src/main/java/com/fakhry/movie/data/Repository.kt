@@ -14,7 +14,7 @@ import com.fakhry.movie.data.source.remote.response.tvshow.popular.TvShowRespons
 import com.fakhry.movie.utils.AppExecutors
 import com.fakhry.movie.vo.Resource
 
-class Repository private constructor(
+class Repository(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors,
@@ -149,8 +149,8 @@ class Repository private constructor(
                 val tvShowDetails = MutableLiveData<ApiResponse<TvShowDetailsResponse>>()
                 remoteDataSource.getTvShowDetails(tvShowId,
                     object : RemoteDataSource.LoadTvShowDetailsCallback {
-                        override fun onTvShowDetailReceived(tVShowDetailResponse: ApiResponse<TvShowDetailsResponse>) {
-                            tvShowDetails.postValue(tVShowDetailResponse)
+                        override fun onTvShowDetailReceived(tvShowDetailResponse: ApiResponse<TvShowDetailsResponse>) {
+                            tvShowDetails.postValue(tvShowDetailResponse)
                         }
                     })
                 return tvShowDetails

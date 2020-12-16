@@ -1,10 +1,15 @@
 package com.fakhry.movie.data
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.MutableLiveData
+import com.fakhry.movie.data.source.local.LocalDataSource
+import com.fakhry.movie.data.source.local.entity.MovieEntity
+import com.fakhry.movie.data.source.local.entity.TvShowEntity
+import com.fakhry.movie.data.source.remote.ApiResponse
 import com.fakhry.movie.data.source.remote.RemoteDataSource
+import com.fakhry.movie.utils.AppExecutors
 import com.fakhry.movie.utils.DataDummy
 import com.fakhry.movie.utils.LiveDataTestUtil
-import com.nhaarman.mockitokotlin2.any
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNotNull
 import org.junit.Rule
@@ -12,81 +17,108 @@ import org.junit.Test
 import org.mockito.Mockito.*
 
 class RepositoryTest {
-
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private val remote = mock(RemoteDataSource::class.java)
-    private val repository = Repository(remote)
+    private val local = mock(LocalDataSource::class.java)
+    private val appExecutors = mock(AppExecutors::class.java)
+    private val repository = Repository(remote, local, appExecutors)
 
-    private val movieResponse = DataDummy.generateRemoteDummyMovies()
-    private val movieId = movieResponse[0].id
-    private val movieDetails = DataDummy.generateRemoteDummyMovieDetails(movieId)
+    private val movieResponse = ApiResponse.success(DataDummy.generateRemoteDummyMovies())
+    private val movieId = movieResponse.body[0].id
+    private val movieDetails =
+        ApiResponse.success(DataDummy.generateRemoteDummyMovieDetails(movieId))
 
 
-    private val tvShowResponse = DataDummy.generateRemoteDummyTvShows()
-    private val tvShowId = tvShowResponse[0].id
-    private val tvShowDetails = DataDummy.generateRemoteDummyTvShowDetails(tvShowId)
+    private val tvShowResponse = ApiResponse.success(DataDummy.generateRemoteDummyTvShows())
+    private val tvShowId = tvShowResponse.body[0].id
+    private val tvShowDetails =
+        ApiResponse.success(DataDummy.generateRemoteDummyTvShowDetails(tvShowId))
+
+    private val favMovieResponse = ApiResponse.success(DataDummy.generateFavoriteMovie())
+
+    private val favTvShowResponse = ApiResponse.success(DataDummy.generateFavoriteTvShow())
 
     @Test
     fun getPopularMovies() {
-        doAnswer { invocation ->
-            (invocation.arguments[0] as RemoteDataSource.LoadAllMoviesCallback).onAllMoviesReceived(
-                movieResponse)
-            null
-        }.`when`(remote).getPopularMovies(any())
+        val dummyMovies = MutableLiveData<List<MovieEntity>>()
+        dummyMovies.value = DataDummy.generateDummyMovie()
+        `when`(local.getAllMovies()).thenReturn(dummyMovies)
+
         val moviesEntities = LiveDataTestUtil.getValue(repository.getPopularMovies())
-        verify(remote).getPopularMovies(any())
+        verify(local).getAllMovies()
         assertNotNull(moviesEntities)
-        assertEquals(movieResponse.size.toLong(), moviesEntities.size.toLong())
+        assertEquals(movieResponse.body.size.toLong(), moviesEntities.data?.size?.toLong())
     }
 
     @Test
     fun getPopularTvShows() {
-        doAnswer { invocation ->
-            (invocation.arguments[0] as RemoteDataSource.LoadAllTvShowsCallback).onAllTvShowReceived(
-                tvShowResponse)
-            null
-        }.`when`(remote).getPopularTvShows(any())
+        val dummyTvShow = MutableLiveData<List<TvShowEntity>>()
+        dummyTvShow.value = DataDummy.generateDummyTvShow()
+        `when`(local.getAllTvShows()).thenReturn(dummyTvShow)
+
         val moviesEntities = LiveDataTestUtil.getValue(repository.getPopularTvShows())
-        verify(remote).getPopularTvShows(any())
+        verify(local).getAllTvShows()
         assertNotNull(moviesEntities)
-        assertEquals(movieResponse.size.toLong(), moviesEntities.size.toLong())
+        assertEquals(movieResponse.body.size.toLong(), moviesEntities.data?.size?.toLong())
     }
 
     @Test
     fun getMovieDetails() {
-        doAnswer { invocation ->
-            (invocation.arguments[1] as RemoteDataSource.LoadMovieDetailsCallback).onMovieDetailsReceived(
-                movieDetails)
-            null
-        }.`when`(remote).getMovieDetails(eq(movieId), any())
+        val dummyMovieDetails = MutableLiveData<MovieEntity>()
+        dummyMovieDetails.value = DataDummy.generateDummyMovie()[movieId]
+        `when`(local.getMovieDetails(eq(movieId))).thenReturn(dummyMovieDetails)
+
         val movieDetailsEntities =
             LiveDataTestUtil.getValue(repository.getMovieDetails(movieId))
-        verify(remote).getMovieDetails(eq(movieId), any())
+        verify(local).getMovieDetails(eq(movieId))
         assertNotNull(movieDetailsEntities)
-        assertEquals(movieResponse[0].title, movieDetailsEntities.title)
-        assertEquals(movieResponse[0].overview, movieDetailsEntities.overview)
-        assertEquals(movieResponse[0].posterPath, movieDetailsEntities.posterPath)
-        assertEquals(movieResponse[0].backdropPath, movieDetailsEntities.backdropPath)
-        assertEquals(movieResponse[0].voteAverage, movieDetailsEntities.voteAverage)
+        assertEquals(movieDetails.body.title, movieDetailsEntities.data?.title)
+        assertEquals(movieDetails.body.overview, movieDetailsEntities.data?.overview)
+        assertEquals(movieDetails.body.posterPath, movieDetailsEntities.data?.posterPath)
+        assertEquals(movieDetails.body.backdropPath, movieDetailsEntities.data?.backdropPath)
+        assertEquals(movieDetails.body.voteAverage, movieDetailsEntities.data?.voteAverage)
     }
 
     @Test
     fun getTvShowDetails() {
-        doAnswer { invocation ->
-            (invocation.arguments[1] as RemoteDataSource.LoadTvShowDetailsCallback).onTvShowDetailReceived(
-                tvShowDetails)
-            null
-        }.`when`(remote).getTvShowDetails(eq(tvShowId), any())
+        val dummyTvShowDetails = MutableLiveData<TvShowEntity>()
+        dummyTvShowDetails.value = DataDummy.generateDummyTvShow()[tvShowId]
+        `when`(local.getTvShowDetails(eq(tvShowId))).thenReturn(dummyTvShowDetails)
+
         val tvShowDetailsEntity =
             LiveDataTestUtil.getValue(repository.getTvShowDetails(tvShowId))
-        verify(remote).getTvShowDetails(eq(tvShowId), any())
+        verify(local).getTvShowDetails(eq(tvShowId))
         assertNotNull(tvShowDetailsEntity)
-        assertEquals(tvShowResponse[0].name, tvShowDetailsEntity.name)
-        assertEquals(tvShowResponse[0].overview, tvShowDetailsEntity.overview)
-        assertEquals(tvShowResponse[0].posterPath, tvShowDetailsEntity.posterPath)
-        assertEquals(tvShowResponse[0].backdropPath, tvShowDetailsEntity.backdropPath)
-        assertEquals(tvShowResponse[0].voteAverage, tvShowDetailsEntity.voteAverage)
+        assertEquals(tvShowDetails.body.name, tvShowDetailsEntity.data?.name)
+        assertEquals(tvShowDetails.body.overview, tvShowDetailsEntity.data?.overview)
+        assertEquals(tvShowDetails.body.posterPath, tvShowDetailsEntity.data?.posterPath)
+        assertEquals(tvShowDetails.body.backdropPath, tvShowDetailsEntity.data?.backdropPath)
+        assertEquals(tvShowDetails.body.voteAverage, tvShowDetailsEntity.data?.voteAverage)
+    }
+
+    @Test
+    fun getFavMovieDetails() {
+        val dummyFavMovies = MutableLiveData<List<MovieEntity>>()
+        dummyFavMovies.value = DataDummy.generateFavoriteMovie()
+        `when`(local.getFavMovies()).thenReturn(dummyFavMovies)
+
+        val moviesEntities = LiveDataTestUtil.getValue(repository.getFavMovies())
+        verify(local).getFavMovies()
+        assertNotNull(moviesEntities)
+        assertEquals(favMovieResponse.body.size.toLong(), moviesEntities.size.toLong())
+    }
+
+    @Test
+    fun getFavTvShowDetails() {
+        val dummyFavTvShow = MutableLiveData<List<TvShowEntity>>()
+        dummyFavTvShow.value = DataDummy.generateFavoriteTvShow()
+        `when`(local.getFavTvShows()).thenReturn(dummyFavTvShow)
+
+        val moviesEntities = LiveDataTestUtil.getValue(repository.getFavTvShows())
+        verify(local).getFavTvShows()
+        assertNotNull(moviesEntities)
+        assertEquals(favTvShowResponse.body.size.toLong(), moviesEntities.size.toLong())
     }
 }

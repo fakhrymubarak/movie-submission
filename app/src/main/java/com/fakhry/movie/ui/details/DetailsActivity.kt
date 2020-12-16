@@ -45,20 +45,16 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
             fab_favorite -> {
                 if (isMovieDetails) {
                     if (mMovieEntity.isFavMovie) {
-                        Toast.makeText(this, "Berhasil menghapus dari favorite", Toast.LENGTH_LONG)
-                            .show()
+                        Toast.makeText(this, R.string.remove_fav, Toast.LENGTH_LONG).show()
                     } else {
-                        Toast.makeText(this, "Berhasil menambahkan ke favorite", Toast.LENGTH_LONG)
-                            .show()
+                        Toast.makeText(this, R.string.add_fav, Toast.LENGTH_LONG).show()
                     }
                     detailsViewModel.setFavMovie(mMovieEntity)
                 } else {
                     if (mTvShowEntity.isFavTvShow) {
-                        Toast.makeText(this, "Berhasil menghapus dari favorite", Toast.LENGTH_LONG)
-                            .show()
+                        Toast.makeText(this, R.string.remove_fav, Toast.LENGTH_LONG).show()
                     } else {
-                        Toast.makeText(this, "Berhasil menambahkan ke favorite", Toast.LENGTH_LONG)
-                            .show()
+                        Toast.makeText(this, R.string.add_fav, Toast.LENGTH_LONG).show()
                     }
                     detailsViewModel.setFavTvShow(mTvShowEntity)
                 }

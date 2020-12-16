@@ -130,6 +130,6 @@ class RemoteDataSource {
     }
 
     interface LoadTvShowDetailsCallback {
-        fun onTvShowDetailReceived(tVShowDetailResponse: ApiResponse<TvShowDetailsResponse>)
+        fun onTvShowDetailReceived(tvShowDetailResponse: ApiResponse<TvShowDetailsResponse>)
     }
 }

@@ -1,5 +1,7 @@
 package com.fakhry.movie.utils
 
+import com.fakhry.movie.data.source.local.entity.MovieEntity
+import com.fakhry.movie.data.source.local.entity.TvShowEntity
 import com.fakhry.movie.data.source.remote.response.movie.details.MovieDetailsResponse
 import com.fakhry.movie.data.source.remote.response.movie.popular.MovieResponse
 import com.fakhry.movie.data.source.remote.response.tvshow.details.TvShowDetailsResponse
@@ -8,7 +10,7 @@ import java.util.*
 
 object DataDummy {
 
-    fun generateDummyMovie(): ArrayList<MovieResponse> {
+    fun generateDummyMovie(): List<MovieEntity> {
         val movieId = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
         val movieTitle = arrayOf(
@@ -26,7 +28,7 @@ object DataDummy {
 
         val movieSynopsis = arrayOf(
             "Every six years, an ancient order of jiu-jitsu fighters joins forces to battle a vicious race of alien invaders. But when a celebrated war hero goes down in defeat, the fate of the planet and mankind hangs in the balance.",
-            "The work of billionaire tech CEO Donovan Chalmers is so valuable that he hires mercenaries to protect it, and a terrorist group kidnaps his daughter just to get it.",
+            "Tanjirō Kamado, joined with Inosuke Hashibira, a boy raised by boars who wears a boar's head, and Zenitsu Agatsuma, a scared boy who reveals his true power when he sleeps, boards the Infinity Train on a new mission with the Fire Hashira, Kyōjurō Rengoku, to defeat a demon who has been tormenting the people and killing the demon slayers who oppose it!",
             "The work of billionaire tech CEO Donovan Chalmers is so valuable that he hires mercenaries to protect it, and a terrorist group kidnaps his daughter just to get it.",
             "In late 1967, a young orphaned boy goes to live with his loving grandma in the rural Alabama town of Demopolis. As the boy and his grandmother encounter some deceptively glamorous but thoroughly diabolical witches, she wisely whisks him away to a seaside resort. Regrettably, they arrive at precisely the same time that the world's Grand High Witch has gathered.",
             "When his best friend Gary is suddenly snatched away, SpongeBob takes Patrick on a madcap mission far beyond Bikini Bottom to save their pink-shelled pal.",
@@ -66,23 +68,24 @@ object DataDummy {
 
         val rating = doubleArrayOf(5.9, 6.1, 5.0, 7.0, 8.3, 4.9, 7.3, 6.3, 7.7, 7.5)
 
-        val movieList = ArrayList<MovieResponse>()
+        val movieList = ArrayList<MovieEntity>()
 
         for (i in movieId.indices) {
-            val movie = MovieResponse(
+            val movie = MovieEntity(
                 movieId[i],
                 movieTitle[i],
                 movieSynopsis[i],
                 moviePosterUrl[i],
                 backgroundPath[i],
-                rating[i])
+                rating[i],
+                false)
             movieList.add(movie)
         }
 
         return movieList
     }
 
-    fun generateDummyTvShow(): ArrayList<TvShowResponse> {
+    fun generateDummyTvShow(): List<TvShowEntity> {
         val tvShowId = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
         val tvShowTitle = arrayOf(
@@ -140,16 +143,17 @@ object DataDummy {
 
         val rating = doubleArrayOf(8.5, 8.6, 7.4, 8.5, 8.4, 8.9, 7.7, 8.1, 8.0, 7.7)
 
-        val tvShowList = ArrayList<TvShowResponse>()
+        val tvShowList = ArrayList<TvShowEntity>()
 
         for (i in tvShowId.indices) {
-            val tvShow = TvShowResponse(
+            val tvShow = TvShowEntity(
                 tvShowId[i],
                 tvShowTitle[i],
                 tvShowSynopsis[i],
                 tvShowPosterUrl[i],
                 backgroundPath[i],
-                rating[i])
+                rating[i],
+                false)
             tvShowList.add(tvShow)
         }
 
@@ -306,7 +310,6 @@ object DataDummy {
 
     fun generateRemoteDummyMovieDetails(pmMovieId: Int): MovieDetailsResponse {
         val movieId = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-
         val movieTitle = arrayOf(
             "Demon Slayer: Kimetsu no Yaiba - The Movie: Mugen Train",
             "Hard Kill",
@@ -453,5 +456,81 @@ object DataDummy {
             }
         }
         return tvShow
+    }
+
+    fun generateFavoriteMovie(): List<MovieEntity> {
+        val movieId = arrayOf(1)
+
+        val movieTitle = arrayOf(
+            "Jiu Jitsu"
+        )
+
+        val movieSynopsis = arrayOf(
+            "Every six years, an ancient order of jiu-jitsu fighters joins forces to battle a vicious race of alien invaders. But when a celebrated war hero goes down in defeat, the fate of the planet and mankind hangs in the balance."
+        )
+
+        val moviePosterUrl = arrayOf(
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/eLT8Cu357VOwBVTitkmlDEg32Fs.jpg"
+        )
+
+        val backgroundPath = arrayOf(
+            "https://image.tmdb.org/t/p/w500_and_h282_face/jeAQdDX9nguP6YOX6QSWKDPkbBo.jpg"
+        )
+
+        val rating = doubleArrayOf(5.9)
+
+        val movieList = ArrayList<MovieEntity>()
+
+        for (i in movieId.indices) {
+            val movie = MovieEntity(
+                movieId[i],
+                movieTitle[i],
+                movieSynopsis[i],
+                moviePosterUrl[i],
+                backgroundPath[i],
+                rating[i],
+                false)
+            movieList.add(movie)
+        }
+
+        return movieList
+    }
+
+    fun generateFavoriteTvShow(): List<TvShowEntity> {
+        val tvShowId = arrayOf(1)
+
+        val tvShowTitle = arrayOf(
+            "The Mandalorian"
+        )
+
+        val tvShowSynopsis = arrayOf(
+            "After the fall of the Galactic Empire, lawlessness has spread throughout the galaxy. A lone gunfighter makes his way through the outer reaches, earning his keep as a bounty hunter."
+        )
+
+        val tvShowPosterUrl = arrayOf(
+            "https://image.tmdb.org/t/p/w600_and_h900_bestv2/sWgBv7LV2PRoQgkxwlibdGXKz1S.jpg"
+        )
+
+        val backgroundPath = arrayOf(
+            "https://image.tmdb.org/t/p/w500_and_h282_face/9ijMGlJKqcslswWUzTEwScm82Gs.jpg"
+        )
+
+        val rating = doubleArrayOf(8.5)
+
+        val tvShowList = ArrayList<TvShowEntity>()
+
+        for (i in tvShowId.indices) {
+            val tvShow = TvShowEntity(
+                tvShowId[i],
+                tvShowTitle[i],
+                tvShowSynopsis[i],
+                tvShowPosterUrl[i],
+                backgroundPath[i],
+                rating[i],
+                false)
+            tvShowList.add(tvShow)
+        }
+
+        return tvShowList
     }
 }

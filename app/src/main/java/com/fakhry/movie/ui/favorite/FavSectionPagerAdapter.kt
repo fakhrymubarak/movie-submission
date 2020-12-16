@@ -23,7 +23,7 @@ class FavSectionsPagerAdapter(private val mContext: Context, fm: FragmentManager
             else -> Fragment()
         }
 
-    override fun getPageTitle(position: Int): CharSequence? {
+    override fun getPageTitle(position: Int): CharSequence {
         return mContext.resources.getString(tabTables[position])
     }
 
