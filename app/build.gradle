@@ -35,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -63,7 +66,6 @@ dependencies {
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
     testImplementation "androidx.arch.core:core-testing:$archLifecycleTestVersion"
     implementation "com.android.support.test.espresso:espresso-idling-resource:$espressoVersion"
-    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
 
     //architecture component
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleVersion"
@@ -79,4 +81,7 @@ dependencies {
     //ROOM database
     implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
+
+    //paging
+    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
 }

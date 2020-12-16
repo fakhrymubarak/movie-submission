@@ -1,64 +1,70 @@
 package com.fakhry.movie.ui.favorite.tvshow
 
+import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.fakhry.movie.R
 import com.fakhry.movie.data.source.local.entity.TvShowEntity
-import kotlinx.android.synthetic.main.item_rows.view.*
+import com.fakhry.movie.databinding.ItemRowsBinding
+import com.fakhry.movie.ui.details.DetailsActivity
 
-class FavTVShowAdapter : RecyclerView.Adapter<FavTVShowAdapter.ListViewHolder>() {
-    private lateinit var onItemClickCallback: OnItemClickCallback
-    private val listMovie = ArrayList<TvShowEntity>()
+class FavTVShowAdapter : PagedListAdapter<TvShowEntity, FavTVShowAdapter.ListViewHolder>(
+    DIFF_CALLBACK) {
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TvShowEntity>() {
+            override fun areItemsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
+                return oldItem.tvShowId == newItem.tvShowId
+            }
 
-    interface OnItemClickCallback {
-        fun onItemClicked(data: TvShowEntity)
-    }
-
-    fun setMovies(items: List<TvShowEntity>) {
-        listMovie.clear()
-        listMovie.addAll(items)
-        notifyDataSetChanged()
+            override fun areContentsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {
-        val view: View = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.item_rows, viewGroup, false)
-        return ListViewHolder(view)
+        val itemRowsBinding =
+            ItemRowsBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
+        return ListViewHolder(itemRowsBinding)
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val circularProgressDrawable = CircularProgressDrawable(holder.ivAvatar.context)
-        circularProgressDrawable.strokeWidth = 5f
-        circularProgressDrawable.centerRadius = 30f
-        val movie = listMovie[position]
-        Glide.with(holder.itemView.context)
-            .load("https://image.tmdb.org/t/p/w600_and_h900_bestv2" + movie.posterPath)
-            .apply(RequestOptions.placeholderOf(circularProgressDrawable))
-            .error(R.drawable.ic_broken_image_24dp)
-            .into(holder.ivAvatar)
-        holder.tvTitle.text = movie.name
-        holder.tvSynopsis.text = movie.overview
-        holder.tvRating.text = movie.voteAverage.toString()
-        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listMovie[position]) }
+        val favTvShow = getItem(position)
+        if (favTvShow != null) {
+            holder.bind(favTvShow)
+        }
     }
 
-    override fun getItemCount(): Int = listMovie.size
+    fun getSwipedData(swipedPosition: Int): TvShowEntity? = getItem(swipedPosition)
 
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
-        this.onItemClickCallback = onItemClickCallback
-    }
+    class ListViewHolder(private val binding: ItemRowsBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(favTvShow: TvShowEntity) {
+            with(binding){
+                tvTitle.text = favTvShow.name
+                tvDesc.text = favTvShow.overview
+                tvRating.text = favTvShow.voteAverage.toString()
+                itemView.setOnClickListener {
+                    val intent = Intent(itemView.context, DetailsActivity::class.java)
+                    intent.putExtra(DetailsActivity.EXTRA_TV, favTvShow.tvShowId)
+                    itemView.context.startActivity(intent)
+                }
+                val circularProgressDrawable = CircularProgressDrawable(ivPoster.context)
+                circularProgressDrawable.strokeWidth = 5f
+                circularProgressDrawable.centerRadius = 30f
 
-    class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var ivAvatar: ImageView = itemView.iv_poster
-        var tvTitle: TextView = itemView.tv_title
-        var tvSynopsis: TextView = itemView.tv_desc
-        var tvRating: TextView = itemView.tv_rating
+                Glide.with(itemView.context)
+                    .load("https://image.tmdb.org/t/p/w600_and_h900_bestv2" + favTvShow.posterPath)
+                    .apply(RequestOptions.placeholderOf(circularProgressDrawable))
+                    .error(R.drawable.ic_broken_image_24dp)
+                    .into(ivPoster)
+            }
+        }
     }
 }

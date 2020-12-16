@@ -1,6 +1,5 @@
 package com.fakhry.movie.ui.tvshow
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fakhry.movie.R
 import com.fakhry.movie.data.source.local.entity.TvShowEntity
-import com.fakhry.movie.ui.details.DetailsActivity
 import com.fakhry.movie.utils.EspressoIdlingResource
 import com.fakhry.movie.viewmodel.ViewModelFactory
 import com.fakhry.movie.vo.Status
@@ -60,26 +59,15 @@ class TvShowFragment : Fragment() {
         }
     }
 
-    private fun showRecyclerView(tvShows: List<TvShowEntity>) {
+    private fun showRecyclerView(tvShows: PagedList<TvShowEntity>) {
         rv_tv_show.setHasFixedSize(true)
         val tvShowAdapter = TvShowAdapter()
-        tvShowAdapter.setTvShows(tvShows)
+        tvShowAdapter.submitList(tvShows)
         tvShowAdapter.notifyDataSetChanged()
 
         rv_tv_show.layoutManager = LinearLayoutManager(context)
         rv_tv_show.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
         rv_tv_show.adapter = tvShowAdapter
-        tvShowAdapter.setOnItemClickCallback(object : TvShowAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: TvShowEntity) {
-                showSelectedUser(data.tvShowId)
-            }
-        })
-    }
-
-    private fun showSelectedUser(itemsId: Int?) {
-        val intent = Intent(requireActivity(), DetailsActivity::class.java)
-        intent.putExtra(DetailsActivity.EXTRA_TV, itemsId)
-        startActivity(intent)
     }
 
     private fun showLoading(state: Boolean) =

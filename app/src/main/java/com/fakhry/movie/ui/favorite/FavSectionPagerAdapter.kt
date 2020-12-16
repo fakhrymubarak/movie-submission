@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.fakhry.movie.R
-import com.fakhry.movie.ui.favorite.movie.FavoriteMovieFragment
-import com.fakhry.movie.ui.favorite.tvshow.FavoriteTvShowFragment
+import com.fakhry.movie.ui.favorite.movie.FavMovieFragment
+import com.fakhry.movie.ui.favorite.tvshow.FavTvShowFragment
 
 class FavSectionsPagerAdapter(private val mContext: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
@@ -18,8 +18,8 @@ class FavSectionsPagerAdapter(private val mContext: Context, fm: FragmentManager
 
     override fun getItem(position: Int): Fragment =
         when(position) {
-            0 -> FavoriteMovieFragment()
-            1 -> FavoriteTvShowFragment()
+            0 -> FavMovieFragment()
+            1 -> FavTvShowFragment()
             else -> Fragment()
         }
 
