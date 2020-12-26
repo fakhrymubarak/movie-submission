@@ -43,12 +43,14 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
                 onBackPressed()
             }
             fab_favorite -> {
+                EspressoIdlingResource.increment()
                 if (isMovieDetails) {
                     if (mMovieEntity.isFavMovie) {
                         Toast.makeText(this, R.string.remove_fav, Toast.LENGTH_LONG).show()
                     } else {
                         Toast.makeText(this, R.string.add_fav, Toast.LENGTH_LONG).show()
                     }
+                    EspressoIdlingResource.decrement()
                     detailsViewModel.setFavMovie(mMovieEntity)
                 } else {
                     if (mTvShowEntity.isFavTvShow) {
@@ -57,6 +59,7 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
                         Toast.makeText(this, R.string.add_fav, Toast.LENGTH_LONG).show()
                     }
                     detailsViewModel.setFavTvShow(mTvShowEntity)
+                    EspressoIdlingResource.decrement()
                 }
             }
         }

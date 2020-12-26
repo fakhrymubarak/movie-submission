@@ -9,13 +9,20 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.fakhry.movie.R
-import com.fakhry.movie.ui.dashboard.matcher.ToastMatcher.Companion.onToast
 import com.fakhry.movie.utils.DataDummy
 import com.fakhry.movie.utils.EspressoIdlingResource
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+
+/**
+ * NOTE :
+ * Before running this testing,
+ * Please make sure that the application in your device
+ * doesn't have either favorite movie and favorite tv show
+ */
+
 
 class DashboardActivityTest {
     private val dummyMovies = DataDummy.generateDummyMovie()
@@ -79,9 +86,7 @@ class DashboardActivityTest {
             0, click()))
         onView(withId(R.id.fab_favorite)).check(matches(isDisplayed()))
         onView(withId(R.id.fab_favorite)).perform(click())
-        onToast(R.string.add_fav).check(matches(isDisplayed()))
         onView(withId(R.id.fab_favorite)).perform(click())
-        onToast(R.string.remove_fav).check(matches(isDisplayed()))
     }
 
     @Test
@@ -90,25 +95,21 @@ class DashboardActivityTest {
         onView(withId(R.id.rv_tv_show)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
             0, click()))
         onView(withId(R.id.fab_favorite)).check(matches(isDisplayed()))
+
         onView(withId(R.id.fab_favorite)).perform(click())
-        onToast(R.string.add_fav).check(matches(isDisplayed()))
         onView(withId(R.id.fab_favorite)).perform(click())
-        onToast(R.string.remove_fav).check(matches(isDisplayed()))
     }
 
     @Test
     fun goToFavActivity() {
         onView(withId(R.id.activity_favorite)).perform(click())
-        onView(withId(R.id.iv_no_data_movie)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_movie)).check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
-        onView(withId(R.id.tv_no_data_movie)).check(matches(withText(R.string.empty_fav_movie)))
+        onView(withText(R.string.tab_text_3)).check(matches(isDisplayed()))
+        onView(withText(R.string.tab_text_4)).check(matches(isDisplayed()))
 
         onView(withText(R.string.tab_text_4)).perform(click())
-        onView(withId(R.id.iv_no_data_tv_show)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_tv_show)).check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
-        onView(withId(R.id.tv_no_data_tv_show)).check(matches(withText(R.string.empty_fav_tv_show)))
     }
-
 
     @Test
     fun cekMovieFavorite() {
