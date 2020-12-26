@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fakhry.movie.R
 import com.fakhry.movie.data.source.local.entity.TvShowEntity
-import com.fakhry.movie.utils.EspressoIdlingResource
 import com.fakhry.movie.viewmodel.ViewModelFactory
 import com.fakhry.movie.vo.Status
 import kotlinx.android.synthetic.main.fragment_tv_show.*
@@ -36,7 +35,6 @@ class TvShowFragment : Fragment() {
             val tvShowViewModel = ViewModelProvider(
                 this, factory
             )[TvShowViewModel::class.java]
-            EspressoIdlingResource.increment()
             tvShowViewModel.getPopularTvShows().observe(this, { tvShows ->
                 if (tvShows != null) {
                     when (tvShows.status) {
@@ -45,7 +43,6 @@ class TvShowFragment : Fragment() {
                             showLoading(false)
                             if (tvShows.data != null) {
                                 showRecyclerView(tvShows.data)
-                                EspressoIdlingResource.decrement()
                             }
                         }
                         Status.ERROR -> {

@@ -43,14 +43,12 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
                 onBackPressed()
             }
             fab_favorite -> {
-                EspressoIdlingResource.increment()
                 if (isMovieDetails) {
                     if (mMovieEntity.isFavMovie) {
                         Toast.makeText(this, R.string.remove_fav, Toast.LENGTH_LONG).show()
                     } else {
                         Toast.makeText(this, R.string.add_fav, Toast.LENGTH_LONG).show()
                     }
-                    EspressoIdlingResource.decrement()
                     detailsViewModel.setFavMovie(mMovieEntity)
                 } else {
                     if (mTvShowEntity.isFavTvShow) {
@@ -59,7 +57,6 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
                         Toast.makeText(this, R.string.add_fav, Toast.LENGTH_LONG).show()
                     }
                     detailsViewModel.setFavTvShow(mTvShowEntity)
-                    EspressoIdlingResource.decrement()
                 }
             }
         }
@@ -84,7 +81,6 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
 
             when {
                 extras.containsKey(EXTRA_MOVIE) -> {
-                    EspressoIdlingResource.increment()
                     isMovieDetails = true
                     detailsViewModel.setMovieSelected(idMovie)
                     detailsViewModel.getMovieDetails().observe(this, { movieDetails ->
@@ -95,7 +91,6 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
                                     showLoading(false)
                                     if (movieDetails.data != null) {
                                         populateItem(movieDetails.data)
-                                        EspressoIdlingResource.decrement()
                                     }
                                 }
                                 Status.ERROR -> {
@@ -109,7 +104,6 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
                 }
 
                 extras.containsKey(EXTRA_TV) -> {
-                    EspressoIdlingResource.increment()
                     isMovieDetails = false
                     detailsViewModel.setTvShowSelected(idTvShows)
                     detailsViewModel.getTvShowDetails().observe(this, { tvShowDetails ->
@@ -120,7 +114,6 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
                                     showLoading(false)
                                     if (tvShowDetails.data != null) {
                                         populateItem(tvShowDetails.data)
-                                        EspressoIdlingResource.decrement()
                                     }
                                 }
                                 Status.ERROR -> {

@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fakhry.movie.R
 import com.fakhry.movie.data.source.local.entity.MovieEntity
-import com.fakhry.movie.utils.EspressoIdlingResource
 import com.fakhry.movie.viewmodel.ViewModelFactory
 import com.fakhry.movie.vo.Status
 import kotlinx.android.synthetic.main.fragment_movie.*
@@ -33,7 +32,6 @@ class MovieFragment : Fragment() {
         if (activity != null) {
             val factory = ViewModelFactory.getInstance(requireActivity())
             val moviesViewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
-            EspressoIdlingResource.increment()
             moviesViewModel.getPopularMovies().observe(this, { movies ->
                 if (movies != null) {
                     when (movies.status) {
@@ -42,7 +40,6 @@ class MovieFragment : Fragment() {
                             showLoading(false)
                             if (movies.data != null) {
                                 showRecyclerView(movies.data)
-                                EspressoIdlingResource.decrement()
                             }
                         }
                         Status.ERROR -> {

@@ -9,6 +9,7 @@ import com.fakhry.movie.data.source.remote.response.movie.popular.MovieResponse
 import com.fakhry.movie.data.source.remote.response.tvshow.details.TvShowDetailsResponse
 import com.fakhry.movie.data.source.remote.response.tvshow.popular.GetTvShowResponseModel
 import com.fakhry.movie.data.source.remote.response.tvshow.popular.TvShowResponse
+import com.fakhry.movie.utils.EspressoIdlingResource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,6 +42,7 @@ class RemoteDataSource {
                     if (data != null) {
                         val apiResponseData = ApiResponse.success(data)
                         callback.onAllMoviesReceived(apiResponseData)
+                        EspressoIdlingResource.decrement()
                     }
                 }
             }
@@ -52,6 +54,7 @@ class RemoteDataSource {
     }
 
     fun getPopularTvShows(callback: LoadAllTvShowsCallback) {
+        EspressoIdlingResource.increment()
         service.getPopularTvShows(API_KEY).enqueue(object : Callback<GetTvShowResponseModel> {
             override fun onResponse(
                 call: Call<GetTvShowResponseModel>,
@@ -63,6 +66,7 @@ class RemoteDataSource {
                     if (data != null) {
                         val apiResponseData = ApiResponse.success(data)
                         callback.onAllTvShowReceived(apiResponseData)
+                        EspressoIdlingResource.decrement()
                     }
                 }
             }
@@ -75,6 +79,7 @@ class RemoteDataSource {
 
 
     fun getMovieDetails(movieId: Int, callback: LoadMovieDetailsCallback) {
+        EspressoIdlingResource.increment()
         service.getMovieDetails(movieId, API_KEY).enqueue(object : Callback<MovieDetailsResponse> {
             override fun onResponse(
                 call: Call<MovieDetailsResponse>,
@@ -85,6 +90,7 @@ class RemoteDataSource {
                     responseBody?.let {
                         val apiResponseData = ApiResponse.success(it)
                         callback.onMovieDetailsReceived(apiResponseData)
+                        EspressoIdlingResource.decrement()
                     }
                 }
             }
@@ -96,6 +102,7 @@ class RemoteDataSource {
     }
 
     fun getTvShowDetails(tvShowId: Int, callback: LoadTvShowDetailsCallback) {
+        EspressoIdlingResource.increment()
         service.getTvShowDetails(tvShowId, API_KEY)
             .enqueue(object : Callback<TvShowDetailsResponse> {
                 override fun onResponse(
@@ -107,6 +114,7 @@ class RemoteDataSource {
                         responseBody?.let {
                             val apiResponseData = ApiResponse.success(it)
                             callback.onTvShowDetailReceived(apiResponseData)
+                            EspressoIdlingResource.decrement()
                         }
                     }
                 }
