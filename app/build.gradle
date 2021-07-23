@@ -17,7 +17,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
         buildConfigField 'String', "TMDB_API_KEY", tmdbApiKey
         buildConfigField 'String', "TMDB_BASE_API", "\"https://api.themoviedb.org/3/\""
     }
@@ -57,15 +56,19 @@ dependencies {
 
     //testing
     androidTestImplementation "androidx.test.ext:junit:$testJunitVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
     androidTestImplementation "androidx.test:rules:$androidXTestVersion"
     androidTestImplementation "androidx.arch.core:core-testing:$archLifecycleTestVersion"
+    testImplementation "androidx.arch.core:core-testing:$archLifecycleTestVersion"
     testImplementation "junit:junit:$junitVersion"
+
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation "org.mockito:mockito-inline:$mockitoVersion"
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
-    testImplementation "androidx.arch.core:core-testing:$archLifecycleTestVersion"
-    implementation "com.android.support.test.espresso:espresso-idling-resource:$espressoVersion"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    implementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+    androidTestImplementation "androidx.test:runner:1.4.0"
+    androidTestImplementation "androidx.test:rules:1.4.0"
 
     //architecture component
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleVersion"
