@@ -19,10 +19,10 @@ data class MovieEntity(
     var overview: String,
 
     @ColumnInfo(name = "poster_path")
-    var posterPath: String,
+    var posterPath: String?,
 
     @ColumnInfo(name = "backdrop_path")
-    var backdropPath: String,
+    var backdropPath: String?,
 
     @ColumnInfo(name = "vote_average")
     var voteAverage: Double,
